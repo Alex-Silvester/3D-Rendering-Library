@@ -1,0 +1,12 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/Users/alexs/Programming/3D rendering library/3D Rendering Library/3D Rendering Library/out/build/x64-debug/cmake_install.cmake",
+		"C:/Users/alexs/Programming/3D rendering library/3D Rendering Library/3D Rendering Library/out/build/x64-debug/_deps/glfw-build/cmake_install.cmake",
+		"C:/Users/alexs/Programming/3D rendering library/3D Rendering Library/3D Rendering Library/out/build/x64-debug/_deps/glfw-build/src/cmake_install.cmake",
+		"C:/Users/alexs/Programming/3D rendering library/3D Rendering Library/3D Rendering Library/out/build/x64-debug/_deps/glfw-build/docs/cmake_install.cmake",
+		"C:/Users/alexs/Programming/3D rendering library/3D Rendering Library/3D Rendering Library/out/build/x64-debug/_deps/glm-build/cmake_install.cmake",
+		"C:/Users/alexs/Programming/3D rendering library/3D Rendering Library/3D Rendering Library/out/build/x64-debug/_deps/glm-build/glm/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

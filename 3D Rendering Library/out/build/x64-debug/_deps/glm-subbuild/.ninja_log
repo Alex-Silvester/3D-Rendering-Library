@@ -1,0 +1,37 @@
+# ninja log v6
+6	89	7993523486060600	glm-populate-prefix/src/glm-populate-stamp/glm-populate-mkdir	14d948b4d7275942
+14	195	7993536754285321	glm-populate-prefix/src/glm-populate-stamp/glm-populate-update	5853f00351da975c
+14	195	7993536754285321	C:/Users/alexs/Programming/3D rendering library/3D Rendering Library/3D Rendering Library/out/build/x64-debug/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-update	5853f00351da975c
+195	269	7993536756716849	C:/Users/alexs/Programming/3D rendering library/3D Rendering Library/3D Rendering Library/out/build/x64-debug/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-patch	361edcec1e3df2cd
+6	89	7993523486060600	C:/Users/alexs/Programming/3D rendering library/3D Rendering Library/3D Rendering Library/out/build/x64-debug/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-mkdir	14d948b4d7275942
+91	7008	7993523555246959	glm-populate-prefix/src/glm-populate-stamp/glm-populate-download	792563dcc0d8e123
+578	680	7993536760837682	C:/Users/alexs/Programming/3D rendering library/3D Rendering Library/3D Rendering Library/out/build/x64-debug/_deps/glm-subbuild/CMakeFiles/glm-populate-complete	fba38e96dc85838b
+346	425	7993536758316221	glm-populate-prefix/src/glm-populate-stamp/glm-populate-build	52d906578724574c
+195	269	7993536756716849	glm-populate-prefix/src/glm-populate-stamp/glm-populate-patch	361edcec1e3df2cd
+91	7008	7993523555246959	C:/Users/alexs/Programming/3D rendering library/3D Rendering Library/3D Rendering Library/out/build/x64-debug/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-download	792563dcc0d8e123
+269	345	7993536757507360	glm-populate-prefix/src/glm-populate-stamp/glm-populate-configure	1170e8ba79c0ce35
+269	345	7993536757507360	C:/Users/alexs/Programming/3D rendering library/3D Rendering Library/3D Rendering Library/out/build/x64-debug/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-configure	1170e8ba79c0ce35
+578	680	7993536760837682	CMakeFiles/glm-populate-complete	fba38e96dc85838b
+346	425	7993536758316221	C:/Users/alexs/Programming/3D rendering library/3D Rendering Library/3D Rendering Library/out/build/x64-debug/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-build	52d906578724574c
+425	502	7993536759096754	glm-populate-prefix/src/glm-populate-stamp/glm-populate-install	8ea97506c8f8c116
+425	502	7993536759096754	C:/Users/alexs/Programming/3D rendering library/3D Rendering Library/3D Rendering Library/out/build/x64-debug/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-install	8ea97506c8f8c116
+503	577	7993536759840061	glm-populate-prefix/src/glm-populate-stamp/glm-populate-test	c5c08884f5518ac5
+578	680	7993536760837682	C:/Users/alexs/Programming/3D rendering library/3D Rendering Library/3D Rendering Library/out/build/x64-debug/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-done	fba38e96dc85838b
+503	577	7993536759840061	C:/Users/alexs/Programming/3D rendering library/3D Rendering Library/3D Rendering Library/out/build/x64-debug/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-test	c5c08884f5518ac5
+578	680	7993536760837682	glm-populate-prefix/src/glm-populate-stamp/glm-populate-done	fba38e96dc85838b
+14	195	7993550392368480	glm-populate-prefix/src/glm-populate-stamp/glm-populate-update	5853f00351da975c
+14	195	7993550392368480	C:/Users/alexs/Programming/3D rendering library/3D Rendering Library/3D Rendering Library/out/build/x64-debug/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-update	5853f00351da975c
+195	274	7993550394885902	glm-populate-prefix/src/glm-populate-stamp/glm-populate-patch	361edcec1e3df2cd
+195	274	7993550394885902	C:/Users/alexs/Programming/3D rendering library/3D Rendering Library/3D Rendering Library/out/build/x64-debug/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-patch	361edcec1e3df2cd
+275	351	7993550395657653	glm-populate-prefix/src/glm-populate-stamp/glm-populate-configure	1170e8ba79c0ce35
+275	351	7993550395657653	C:/Users/alexs/Programming/3D rendering library/3D Rendering Library/3D Rendering Library/out/build/x64-debug/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-configure	1170e8ba79c0ce35
+352	429	7993550396433002	glm-populate-prefix/src/glm-populate-stamp/glm-populate-build	52d906578724574c
+352	429	7993550396433002	C:/Users/alexs/Programming/3D rendering library/3D Rendering Library/3D Rendering Library/out/build/x64-debug/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-build	52d906578724574c
+429	505	7993550397204367	glm-populate-prefix/src/glm-populate-stamp/glm-populate-install	8ea97506c8f8c116
+429	505	7993550397204367	C:/Users/alexs/Programming/3D rendering library/3D Rendering Library/3D Rendering Library/out/build/x64-debug/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-install	8ea97506c8f8c116
+505	581	7993550397966532	glm-populate-prefix/src/glm-populate-stamp/glm-populate-test	c5c08884f5518ac5
+505	581	7993550397966532	C:/Users/alexs/Programming/3D rendering library/3D Rendering Library/3D Rendering Library/out/build/x64-debug/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-test	c5c08884f5518ac5
+581	686	7993550399016060	CMakeFiles/glm-populate-complete	fba38e96dc85838b
+581	686	7993550399016060	glm-populate-prefix/src/glm-populate-stamp/glm-populate-done	fba38e96dc85838b
+581	686	7993550399016060	C:/Users/alexs/Programming/3D rendering library/3D Rendering Library/3D Rendering Library/out/build/x64-debug/_deps/glm-subbuild/CMakeFiles/glm-populate-complete	fba38e96dc85838b
+581	686	7993550399016060	C:/Users/alexs/Programming/3D rendering library/3D Rendering Library/3D Rendering Library/out/build/x64-debug/_deps/glm-subbuild/glm-populate-prefix/src/glm-populate-stamp/glm-populate-done	fba38e96dc85838b
