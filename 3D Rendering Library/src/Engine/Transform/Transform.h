@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Dependencies.h"
+#include "../../Dependencies.h"
 
 //TODO: add rotations, potentially with quaternions
 
@@ -8,6 +8,7 @@ class Transform
 {
 public:
 
+	Transform() = default;
 	Transform(glm::vec3 pos, glm::vec3 scale) : m_position(pos), m_scale(scale) {};
 
 	glm::vec3 m_position = glm::vec3();
