@@ -1,4 +1,4 @@
-﻿# CMakeList.txt : CMake project for 3D Rendering Library, include source and define
+# CMakeList.txt : CMake project for 3D Rendering Library, include source and define
 # project specific logic here.
 #
 cmake_minimum_required (VERSION 3.10)
@@ -56,7 +56,8 @@ add_executable (Renderer
 "src/Dependencies.h" 
 "src/Engine/Game.cpp"
 "src/Engine/Window.h" 
-"src/Engine/Window.cpp")
+"src/Engine/Window.cpp" 
+"src/Engine/Material/Shader.h")
 
 target_link_libraries(Renderer PRIVATE glfw)
 target_link_libraries(Renderer PRIVATE glm::glm)

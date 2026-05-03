@@ -3,6 +3,9 @@
 #define DEPENDENCIES
 
 #include <iostream>
+#include <string>
+#include <fstream>
+#include <sstream>
 
 #include <glad/glad.h>
 #include <glad.cpp>
