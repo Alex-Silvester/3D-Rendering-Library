@@ -2,12 +2,15 @@
 
 #include "Shader.h"
 #include "Texture.h"
+#include "../Transform/Transform.h"
 
 class Material
 {
 public:
 
-	void use(/* Transform transform */ );
+	Material() = default;
+
+	bool use(const Transform &transform);
 
 private:
 
