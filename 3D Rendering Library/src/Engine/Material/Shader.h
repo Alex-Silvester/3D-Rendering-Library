@@ -9,10 +9,10 @@
 struct Colour
 {
 public:
-  Colour(float _r, float _g, float _b) : r(_r), g(_g), b(_b) {}
-  Colour(const glm::vec3 &c) : r(c.x), g(c.y), b(c.z) {}
+  Colour(float _r, float _g, float _b, float _a = 1.f) : r(_r), g(_g), b(_b), a(_a) {}
+  Colour(const glm::vec4 &c) : r(c.x), g(c.y), b(c.z), a(c.w) {}
 public:
-  float r, g, b;
+  float r, g, b, a;
 };
 
 //Code taken from <LearnOpengl.com> under "Getting started/Shaders"

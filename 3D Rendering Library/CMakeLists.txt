@@ -1,4 +1,4 @@
-# CMakeList.txt : CMake project for 3D Rendering Library, include source and define
+﻿# CMakeList.txt : CMake project for 3D Rendering Library, include source and define
 # project specific logic here.
 #
 cmake_minimum_required (VERSION 3.10)
@@ -57,7 +57,8 @@ add_executable (Renderer
 "src/Engine/Game.cpp"
 "src/Engine/Window.h" 
 "src/Engine/Window.cpp" 
-"src/Engine/Material/Shader.h")
+"src/Engine/Material/Material.h"
+"src/Engine/Material/Material.cpp"
 "src/Engine/Material/Shader.h" 
 "src/Engine/Material/Texture.h" 
 "src/Engine/Material/Texture.cpp"
