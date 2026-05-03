@@ -47,6 +47,11 @@ bool Window::isOpen()
 	return !glfwWindowShouldClose(m_window);
 }
 
+GLFWwindow *Window::glfwWindow()
+{
+  return m_window;
+}
+
 bool Window::initialise(float size_x, float size_y, const char *name)
 {
 	// glfw: initialize and configure
@@ -123,8 +128,54 @@ void Window::framebuffer_size_callback(GLFWwindow *window, int width, int height
 
 void Window::processInput()
 {
-	if (glfwGetKey(m_window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-	{
-		glfwSetWindowShouldClose(m_window, true);
-	}
+  GLint polygonMode;
+  glGetIntegerv(GL_POLYGON_MODE, &polygonMode);
+
+  //close window
+  if (Key<GLFW_KEY_ESCAPE>::pressed())
+  {
+    glfwSetWindowShouldClose(m_window, true);
+  }
+
+  //forward/backward movement
+  if (Key<GLFW_KEY_W>::held())
+  {
+    m_camera->ProcessKeyboard(FORWARD, m_delta_time);
+  }
+  if (Key<GLFW_KEY_S>::held())
+  {
+    m_camera->ProcessKeyboard(BACKWARD, m_delta_time);
+  }
+
+  //left/right movement
+  if (Key<GLFW_KEY_A>::held())
+  {
+    m_camera->ProcessKeyboard(LEFT, m_delta_time);
+  }
+  if (Key<GLFW_KEY_D>::held())
+  {
+    m_camera->ProcessKeyboard(RIGHT, m_delta_time);
+  }
+
+  //up/down movement
+  if (Key<GLFW_KEY_SPACE>::held())
+  {
+    m_camera->ProcessKeyboard(UP, m_delta_time);
+  }
+  if (Key<GLFW_KEY_LEFT_SHIFT>::held())
+  {
+    m_camera->ProcessKeyboard(DOWN, m_delta_time);
+  }
+
+  //sprint
+  if (Key<GLFW_KEY_LEFT_CONTROL>::held())
+  {
+    m_camera->sprint_active = true;
+  }
+  if (Key<GLFW_KEY_LEFT_CONTROL>::released())
+  {
+    m_camera->sprint_active = false;
+  }
+
 }
+

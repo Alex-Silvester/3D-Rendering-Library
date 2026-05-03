@@ -1,6 +1,9 @@
 #pragma once
 
-#include "../Dependencies.h"
+#include "../../Dependencies.h"
+
+#include "../Camera/Camera.h"
+#include "../Key/Key.h"
 
 #define DECORATE_WINDOW true
 
@@ -25,6 +28,8 @@ public:
 
 	bool isOpen();
 
+	[[nodiscard]] GLFWwindow* glfwWindow();
+
 private:
 
 	bool initialise(float size_x = SCREEN_WIDTH, float size_y = SCREEN_HEIGHT, const char *name = "");
@@ -44,6 +49,8 @@ private:
 private:
 
 	GLFWwindow *m_window = nullptr;
+
+	std::unique_ptr<Camera> m_camera = std::make_unique<Camera>(nullptr);
 
 	float m_last_frame = 0.f, m_delta_time = 0.f;
 
