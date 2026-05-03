@@ -62,7 +62,7 @@ add_executable (Renderer
 "src/Engine/Material/Shader.h" 
 "src/Engine/Material/Texture.h" 
 "src/Engine/Material/Texture.cpp"
-"stb_image/stb_image.h")
+"stb_image/stb_image.h" "src/Engine/Transform.h" "src/Engine/Transform.cpp")
 
 target_link_libraries(Renderer PRIVATE glfw)
 target_link_libraries(Renderer PRIVATE glm::glm)
