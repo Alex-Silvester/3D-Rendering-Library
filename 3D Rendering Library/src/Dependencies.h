@@ -3,6 +3,9 @@
 #define DEPENDENCIES
 
 #include <iostream>
+#include <string>
+#include <fstream>
+#include <sstream>
 
 #include <glad/glad.h>
 #include <glad.cpp>
@@ -15,6 +18,7 @@
 #include "../imgui-1.92.5/backends/imgui_impl_glfw.h"
 #include "../imgui-1.92.5/backends/imgui_impl_opengl3.h"
 
+#include <stb_image.h>
 
 #endif // !DEPENDENCIES
 
