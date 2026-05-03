@@ -55,14 +55,14 @@ add_executable (Renderer
 "src/Engine/Game.h"
 "src/Dependencies.h" 
 "src/Engine/Game.cpp"
-"src/Engine/Window.h" 
-"src/Engine/Window.cpp" 
+"src/Engine/Window/Window.h" 
+"src/Engine/Window/Window.cpp" 
 "src/Engine/Material/Material.h"
 "src/Engine/Material/Material.cpp"
 "src/Engine/Material/Shader.h" 
 "src/Engine/Material/Texture.h" 
 "src/Engine/Material/Texture.cpp"
-"stb_image/stb_image.h" "src/Engine/Transform.h" "src/Engine/Transform.cpp")
+"stb_image/stb_image.h" "src/Engine/Transform/Transform.h" "src/Engine/Transform/Transform.cpp" "src/Engine/Mesh/Mesh.h" "src/Engine/Mesh/Mesh.cpp")
 
 target_link_libraries(Renderer PRIVATE glfw)
 target_link_libraries(Renderer PRIVATE glm::glm)
