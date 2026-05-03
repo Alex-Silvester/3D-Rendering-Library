@@ -6,11 +6,11 @@
 #include "../../Dependencies.h"
 
 
-struct Color
+struct Colour
 {
 public:
-  Color(float _r, float _g, float _b) : r(_r), g(_g), b(_b) {}
-  Color(const glm::vec3 &c) : r(c.x), g(c.y), b(c.z) {}
+  Colour(float _r, float _g, float _b) : r(_r), g(_g), b(_b) {}
+  Colour(const glm::vec3 &c) : r(c.x), g(c.y), b(c.z) {}
 public:
   float r, g, b;
 };

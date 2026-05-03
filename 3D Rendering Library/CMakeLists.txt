@@ -58,12 +58,17 @@ add_executable (Renderer
 "src/Engine/Window.h" 
 "src/Engine/Window.cpp" 
 "src/Engine/Material/Shader.h")
+"src/Engine/Material/Shader.h" 
+"src/Engine/Material/Texture.h" 
+"src/Engine/Material/Texture.cpp"
+"stb_image/stb_image.h")
 
 target_link_libraries(Renderer PRIVATE glfw)
 target_link_libraries(Renderer PRIVATE glm::glm)
 
 target_include_directories(Renderer PRIVATE "glad/include")
 target_include_directories(Renderer PRIVATE "glad/src")
+target_include_directories(Renderer PRIVATE "stb_image")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET Renderer PROPERTY CXX_STANDARD 20)
