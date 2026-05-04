@@ -62,7 +62,19 @@ add_executable (Renderer
 "src/Engine/Material/Shader.h" 
 "src/Engine/Material/Texture.h" 
 "src/Engine/Material/Texture.cpp"
-"stb_image/stb_image.h" "src/Engine/Transform/Transform.h" "src/Engine/Transform/Transform.cpp" "src/Engine/Mesh/Mesh.h" "src/Engine/Mesh/Mesh.cpp" "src/Engine/Object/Object.h" "src/Engine/Object/Object.cpp" "src/Engine/Camera/Camera.h" "src/Engine/Camera/Camera.cpp" "src/Engine/Key/Key.h" "src/Engine/Key/Key.cpp")
+"stb_image/stb_image.h" 
+"src/Engine/Transform/Transform.h" 
+"src/Engine/Transform/Transform.cpp"
+"src/Engine/Mesh/Mesh.h"
+"src/Engine/Mesh/Mesh.cpp" 
+"src/Engine/Object/Object.h"
+"src/Engine/Object/Object.cpp" 
+"src/Engine/Camera/Camera.h"
+"src/Engine/Camera/Camera.cpp"
+"src/Engine/Key/Key.h" 
+"src/Engine/Key/Key.cpp"
+"src/Engine/Debugger/Debugger.h"
+"src/Engine/Debugger/Debugger.cpp")
 
 target_link_libraries(Renderer PRIVATE glfw)
 target_link_libraries(Renderer PRIVATE glm::glm)
