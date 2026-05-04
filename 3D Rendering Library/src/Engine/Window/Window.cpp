@@ -52,6 +52,11 @@ GLFWwindow *Window::glfwWindow()
   return m_window;
 }
 
+void Window::changeCamera(const Camera &camera)
+{
+	m_camera = std::make_unique<Camera>(camera);
+}
+
 bool Window::initialise(float size_x, float size_y, const char *name)
 {
 	// glfw: initialize and configure
@@ -126,7 +131,7 @@ void Window::framebuffer_size_callback(GLFWwindow *window, int width, int height
 	glViewport(0, 0, width, height);
 }
 
-void Window::processInput()
+bool Window::processInput()
 {
   GLint polygonMode;
   glGetIntegerv(GL_POLYGON_MODE, &polygonMode);
@@ -136,6 +141,12 @@ void Window::processInput()
   {
     glfwSetWindowShouldClose(m_window, true);
   }
+
+	if (m_camera.get() == nullptr)
+	{
+		std::cerr << "Camera not set\n";
+		return false;
+	}
 
   //forward/backward movement
   if (Key<GLFW_KEY_W>::held())
@@ -176,6 +187,6 @@ void Window::processInput()
   {
     m_camera->sprint_active = false;
   }
-
+	return true;
 }
 

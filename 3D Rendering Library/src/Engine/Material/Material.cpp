@@ -2,7 +2,7 @@
 
 bool Material::use(const Transform &transform)
 {
-	if (!m_shader_ptr)
+	if (m_shader_ptr.get() == nullptr)
 	{
 		std::cerr << "Material requires shader to use\n";
 		return false;
@@ -13,6 +13,8 @@ bool Material::use(const Transform &transform)
 	//TODO: Set position and scale here when shaders made
 
 	//if the material has a texture, then use it
-	if(m_texture_ptr)
+	if(m_texture_ptr.get() != nullptr)
 		m_texture_ptr->bindTexture();
+
+	return true;
 }

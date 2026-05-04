@@ -20,7 +20,7 @@ public:
 
 private:
 
-	std::shared_ptr<Shader> m_shader_ptr = std::make_shared<Shader>(nullptr);
-	std::shared_ptr<Texture> m_texture_ptr = std::make_shared<Texture>(nullptr);
+	std::shared_ptr<Shader> m_shader_ptr;
+	std::shared_ptr<Texture> m_texture_ptr;
 
 };
