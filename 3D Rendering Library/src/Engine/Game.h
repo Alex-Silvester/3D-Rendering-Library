@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Dependencies.h"
-#include "Window.h"
+#include "Window/Window.h"
 
 class Game
 {
@@ -11,11 +11,17 @@ public:
 
 private:
 
+	void init();
+
 	void update();
 	void render();
 
+	void addKeys();
+
 private:
 
-	Window m_window = Window();
+	std::shared_ptr<Window> m_window = std::make_shared<Window>();
+
+	Camera m_camera = Camera();
 
 };

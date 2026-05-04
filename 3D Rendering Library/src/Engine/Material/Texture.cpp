@@ -2,6 +2,7 @@
 
 bool Texture::setTexture(std::string path)
 {
+  /*
   glGenTextures(1, &m_texture_ID);
   glBindTexture(GL_TEXTURE_2D, m_texture_ID);
 
@@ -30,7 +31,9 @@ bool Texture::setTexture(std::string path)
   }
   stbi_image_free(data);
 
-	return true;
+  return true;
+  */
+  return false;
 }
 
 void Texture::bindTexture()

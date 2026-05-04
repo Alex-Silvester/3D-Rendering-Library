@@ -2,11 +2,15 @@
 
 #include "../../Dependencies.h"
 
+#include <stb_image.h>
+
 using TextureID = unsigned int;
 
 class Texture
 {
 public:
+
+	Texture() = default;
 
 	bool setTexture(std::string path);
 	void bindTexture();
