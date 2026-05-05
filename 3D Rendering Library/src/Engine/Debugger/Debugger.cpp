@@ -41,9 +41,3 @@ void Debugger::renderFrame()
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
-
-template<typename... Args>
-void Debugger::addText(const std::string &format, Args... args)
-{
-	ImGui::Text(format, sizeof...(args));
-}

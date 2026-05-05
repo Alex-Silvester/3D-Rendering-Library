@@ -18,7 +18,10 @@ public:
 	void renderFrame();
 
 	template<typename... Args>
-	void addText(const std::string &format, Args... args);
+	inline void addText(const char *format, Args... args)
+	{
+		ImGui::Text(format, args...);
+	}
 
 
 private:

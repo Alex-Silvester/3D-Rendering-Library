@@ -35,7 +35,7 @@ void Game::init()
 
 void Game::update()
 {
-	ImGui::ShowDemoWindow();
+	debug_window.addText("Test %.f %d", 1.0f, 3);
 }
 
 void Game::render()
