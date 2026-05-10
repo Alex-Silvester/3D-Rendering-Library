@@ -45,9 +45,8 @@ public:
       return false;
     }
 
-    if (m_held) return true;
-
     m_held = glfwGetKey(m_window->glfwWindow(), ID) == GLFW_PRESS;
+
     return m_held;
   }
 

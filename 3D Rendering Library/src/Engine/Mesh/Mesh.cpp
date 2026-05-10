@@ -21,3 +21,8 @@ void Mesh::bindVBO(VBO vbo)
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(float), &m_vertices[0], GL_STATIC_DRAW);
 }
+
+void Mesh::renderMesh()
+{
+	glDrawArrays(GL_TRIANGLES, 0, m_vertices.size() / 12);
+}

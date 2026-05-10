@@ -1,13 +1,5 @@
 #include "Window.h"
 
-//Window::Window(float size_x, float size_y, const char *name)
-//{
-//	if (!initialise(size_x, size_y, name))
-//	{
-//		std::cerr << "Failed to initialise Window";
-//	}
-//}
-
 void Window::clear(glm::vec4 colour)
 {
 	glClearColor(colour.x, colour.y, colour.z, colour.w);
@@ -48,9 +40,9 @@ GLFWwindow *Window::glfwWindow()
   return m_window;
 }
 
-void Window::changeCamera(const Camera &camera)
+void Window::changeCamera(Camera &camera)
 {
-	m_camera = std::make_unique<Camera>(camera);
+	m_camera = &camera;
 }
 
 void Window::draw(Object &object)
@@ -149,6 +141,11 @@ void Window::mouse_callback(GLFWwindow *window, double xposIn, double yposIn)
 	}
 }
 
+void Window::mouseEvent(double xposIn, double yposIn)
+{
+	m_camera->ProcessMouseMovement(xposIn, yposIn);
+}
+
 void Window::framebuffer_size_callback(GLFWwindow *window, int width, int height)
 {
 	// make sure the viewport matches the new window dimensions; note that width and 
@@ -167,7 +164,7 @@ bool Window::processInput()
     glfwSetWindowShouldClose(m_window, true);
   }
 
-	if (m_camera.get() == nullptr)
+	if (m_camera == nullptr)
 	{
 		std::cerr << "Camera not set\n";
 		return false;
@@ -212,15 +209,18 @@ bool Window::processInput()
   {
     m_camera->sprint_active = false;
   }
+
+	//std::cout << m_camera->Position.x << " " << m_camera->Position.y << " " << m_camera->Position.z << "\n";
+
 	return true;
 }
 
-glm::mat4 Window::getProjection(GLFWwindow *window, const Camera &camera)
+const glm::mat4& Window::getProjection(const Camera &camera)
 {
 	int size_x;
 	int size_y;
 
-	glfwGetWindowSize(window, &size_x, &size_y);
+	glfwGetWindowSize(m_window, &size_x, &size_y);
 
 	return  glm::perspective(
 		glm::radians(camera.Zoom),

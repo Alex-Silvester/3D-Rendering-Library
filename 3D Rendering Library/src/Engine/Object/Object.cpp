@@ -16,4 +16,6 @@ void Object::draw(VAO vao, VBO vbo, const glm::mat4 &view, const Window *window)
   m_mesh.bindVBO(vbo);
 
   m_material.transformModel();
+
+  m_mesh.renderMesh();
 }

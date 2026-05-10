@@ -7,16 +7,15 @@
 using VAO = unsigned int;
 using VBO = unsigned int;
 
-const std::vector<float> default_square =
+static const std::vector<float> default_square =
 {
-	/* position ------- colour --------- normal --- texture coords */
-	 1.f, 1.f,0.f,  1.f,1.f,1.f,1.f,  0.f,1.f,0.f,    0.f,0.f,
-	-1.f, 1.f,0.f,  1.f,1.f,1.f,1.f,  0.f,1.f,0.f,    0.f,0.f,
-	-1.f,-1.f,0.f,  1.f,1.f,1.f,1.f,  0.f,1.f,0.f,    0.f,0.f,
-																								   
-	-1.f,-1.f,0.f,  1.f,1.f,1.f,1.f,  0.f,1.f,0.f,    0.f,0.f,
-	 1.f,-1.f,0.f,  1.f,1.f,1.f,1.f,  0.f,1.f,0.f,    0.f,0.f,
-	 1.f, 1.f,0.f,  1.f,1.f,1.f,1.f,  0.f,1.f,0.f,    0.f,0.f,
+		0.5f, 0.5f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   0.f, 0.f,
+	 -0.5f, 0.5f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   0.f, 0.f,
+	 -0.5f,-0.5f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   0.f, 0.f,
+																						 							   		  	
+	 -0.5f,-0.5f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   0.f, 0.f,
+		0.5f,-0.5f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   0.f, 0.f,
+		0.5f, 0.5f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   0.f, 0.f,
 };
 
 class Mesh
@@ -31,6 +30,8 @@ public:
 	void setMesh_move(const std::vector<float> &verts);
 
 	void bindVBO(VBO vbo);
+
+	void renderMesh();
 
 private:
 

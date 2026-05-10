@@ -31,11 +31,13 @@ public:
 
 	[[nodiscard]] GLFWwindow* glfwWindow();
 
-	void changeCamera(const Camera &camera);
+	void changeCamera(Camera &camera);
 
 	void draw(Object &object);
 
 	bool initialise(float size_x = SCREEN_WIDTH, float size_y = SCREEN_HEIGHT, const char *name = "");
+
+	const glm::mat4& getProjection(const Camera &camera);
 
 private:
 
@@ -45,19 +47,17 @@ private:
 
 	static void mouse_callback(GLFWwindow *window, double xposIn, double yposIn);
 
-	void mouseEvent(double xposIn, double yposIn) {}
+	void mouseEvent(double xposIn, double yposIn);
 
 	static void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 
 	bool processInput();
 
-	glm::mat4 getProjection(GLFWwindow *window, const Camera &camera);
-
 private:
 
 	GLFWwindow *m_window = nullptr;
 
-	std::unique_ptr<Camera> m_camera;
+	Camera* m_camera = nullptr;
 
 	float m_last_frame = 0.f, m_delta_time = 0.f;
 

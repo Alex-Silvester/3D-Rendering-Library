@@ -43,6 +43,9 @@ void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)
     Position += WorldUp * velocity;
   if (direction == DOWN)
     Position -= WorldUp * velocity;
+
+  
+
 }
 
 void Camera::ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch)
@@ -73,20 +76,6 @@ void Camera::ProcessMouseScroll(float yoffset)
     Zoom = 1.0f;
   if (Zoom > 45.0f)
     Zoom = 45.0f;
-}
-
-void Camera::changeView(glm::vec3 m_position, float yaw, float pitch)
-{
-  Position = m_position;
-  Yaw = yaw;
-  Pitch = pitch;
-
-  updateCameraVectors();
-}
-
-void Camera::move(glm::vec3 step)
-{
-  Position += step;
 }
 
 void Camera::updateCameraVectors()
