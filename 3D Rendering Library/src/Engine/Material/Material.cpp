@@ -1,5 +1,10 @@
 #include "Material.h"
 
+Material::Material(std::shared_ptr<Shader> &shader)
+{
+	addShader(shader);
+}
+
 bool Material::use(const Transform &transform)
 {
 	if (m_shader_ptr.get() == nullptr)
@@ -26,4 +31,9 @@ void Material::transformModel()
 	glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
 	model = glm::translate(model, glm::vec3(0.f));
 	m_shader_ptr->setMat4("model", model);
+}
+
+void Material::addShader(std::shared_ptr<Shader> &shader)
+{
+	m_shader_ptr = shader;
 }

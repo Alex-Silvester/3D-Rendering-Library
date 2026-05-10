@@ -27,4 +27,8 @@ private:
 
 	Debugger debug_window = Debugger("test");
 
+	std::shared_ptr<Shader> default_shader = std::make_shared<Shader>();
+
+	Object test_object;
+
 };

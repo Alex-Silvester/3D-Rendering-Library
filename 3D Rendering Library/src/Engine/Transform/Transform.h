@@ -8,8 +8,7 @@ class Transform
 {
 public:
 
-	Transform() = default;
-	Transform(glm::vec3 pos, glm::vec3 scale) : m_position(pos), m_scale(scale) {};
+	Transform(glm::vec3 pos = glm::vec3{ 0.f,0.f,0.f }, glm::vec3 scale = glm::vec3{1.f,1.f,1.f}) : m_position(pos), m_scale(scale) {};
 
 	glm::vec3 m_position = glm::vec3();
 

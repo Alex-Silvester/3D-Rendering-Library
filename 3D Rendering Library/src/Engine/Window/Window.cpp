@@ -1,21 +1,17 @@
 #include "Window.h"
 
-Window::Window(float size_x, float size_y, const char *name)
-{
-	if (!initialise(size_x, size_y, name))
-	{
-		std::cerr << "Failed to initialise Window";
-	}
-}
+//Window::Window(float size_x, float size_y, const char *name)
+//{
+//	if (!initialise(size_x, size_y, name))
+//	{
+//		std::cerr << "Failed to initialise Window";
+//	}
+//}
 
 void Window::clear(glm::vec4 colour)
 {
 	glClearColor(colour.x, colour.y, colour.z, colour.w);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-}
-
-void Window::draw()
-{
 }
 
 void Window::display()
@@ -77,16 +73,30 @@ bool Window::initialise(float size_x, float size_y, const char *name)
 #endif
 
 	m_window = createWindow(size_x, size_y, name);
+
 	glfwSetWindowUserPointer(m_window, reinterpret_cast<void *>(this));
 
+	glGenVertexArrays(1, &m_vao);
+	glGenBuffers(1, &m_vbo);
 
-	// glad: load all OpenGL function pointers
-	// ---------------------------------------
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-	{
-		std::cout << "Failed to initialize GLAD" << std::endl;
-		return false;
-	}
+	glBindVertexArray(m_vao);
+
+	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+
+	//position(3 floats), colour(4 floats), normal(3 floats), texture coordinate(2 floats)
+
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void *)0);
+	glEnableVertexAttribArray(0);
+	// colour attribute
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void *)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+	// normal attribute
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void *)(7 * sizeof(float)));
+	glEnableVertexAttribArray(2);
+	// texture attribute
+	glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void *)(10 * sizeof(float)));
+	glEnableVertexAttribArray(3);
 
 	return true;
 }
@@ -112,6 +122,15 @@ GLFWwindow *Window::makeWindow(float size_x, float size_y, const char *name)
 		return nullptr;
 	}
 	glfwMakeContextCurrent(window);
+
+	// glad: load all OpenGL function pointers
+	// ---------------------------------------
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	{
+		std::cout << "Failed to initialize GLAD" << std::endl;
+		//return false;
+	}
+
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 	glfwSetCursorPosCallback(window, mouse_callback);
 

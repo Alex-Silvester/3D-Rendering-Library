@@ -31,7 +31,7 @@ add_executable (Renderer
 "main.cpp"  
 "glad/include/glad/glad.h"
 "glad/include/KHR/khrplatform.h" 
-"glad/src/glad.cpp" 
+"glad/src/glad.c" 
 "imgui-1.92.5/imconfig.h"
 "imgui-1.92.5/imgui.cpp" 
 "imgui-1.92.5/imgui.h"
@@ -83,8 +83,10 @@ target_include_directories(Renderer PRIVATE "glad/include")
 target_include_directories(Renderer PRIVATE "glad/src")
 target_include_directories(Renderer PRIVATE "stb_image")
 
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/Data/ DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Data/)
+
 if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET Renderer PROPERTY CXX_STANDARD 20)
+  set_property(TARGET Renderer PROPERTY CXX_STANDARD 23)
 endif()
 
 # TODO: Add tests and install targets if needed.

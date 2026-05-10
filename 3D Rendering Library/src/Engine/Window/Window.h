@@ -15,10 +15,10 @@ class Window
 {
 public:
 
-	Window(float size_x = SCREEN_WIDTH, float size_y = SCREEN_HEIGHT, const char *name = "");
+	Window() = default;
+	//Window(float size_x = SCREEN_WIDTH, float size_y = SCREEN_HEIGHT, const char *name = "");
 
 	void clear(glm::vec4 colour = glm::vec4());
-	void draw();
 
 	void display();
 	
@@ -35,9 +35,9 @@ public:
 
 	void draw(Object &object);
 
-private:
-
 	bool initialise(float size_x = SCREEN_WIDTH, float size_y = SCREEN_HEIGHT, const char *name = "");
+
+private:
 
 	GLFWwindow *createWindow(float size_x = SCREEN_WIDTH, float size_y = SCREEN_HEIGHT, const char *name = "");
 

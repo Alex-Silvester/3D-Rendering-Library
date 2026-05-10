@@ -1,7 +1,7 @@
 #ifndef SHADER_H
 #define SHADER_H
 
-#define CHECK_ERRORS false
+#define CHECK_ERRORS true
 
 #include "../../Dependencies.h"
 
@@ -25,6 +25,9 @@ public:
   // ------------------------------------------------------------------------
   void init(const char *vertexPath, const char *fragmentPath)
   {
+    if (!std::filesystem::exists(vertexPath)) printf("vertex path doesn't exist");
+    if (!std::filesystem::exists(fragmentPath)) printf("fragment path doesn't exits");
+
     // 1. retrieve the vertex/fragment source code from filePath
     std::string vertexCode;
     std::string fragmentCode;

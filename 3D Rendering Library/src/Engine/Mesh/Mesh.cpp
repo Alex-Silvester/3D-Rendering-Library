@@ -1,8 +1,18 @@
 #include "Mesh.h"
 
+Mesh::Mesh(const std::vector<float> &verts)
+{
+	setMesh(verts);
+}
+
 void Mesh::setMesh(const std::vector<float> &verts)
 {
-	//std::move(verts.begin(), verts.end(), m_vertices);
+	m_vertices = verts;
+}
+
+void Mesh::setMesh_move(const std::vector<float> &verts)
+{
+	std::move(verts.begin(), verts.end(), m_vertices.data());
 }
 
 void Mesh::bindVBO(VBO vbo)

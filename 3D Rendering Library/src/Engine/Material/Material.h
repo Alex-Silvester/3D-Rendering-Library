@@ -9,9 +9,12 @@ class Material
 public:
 
 	Material() = default;
+	Material(std::shared_ptr<Shader> &shader);
 
 	bool use(const Transform &transform);
 	void transformModel();
+
+	void addShader(std::shared_ptr<Shader> &shader);
 
 private:
 

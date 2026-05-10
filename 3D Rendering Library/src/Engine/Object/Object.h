@@ -21,7 +21,7 @@ private:
 
 public:
 
-	Transform m_transform = Transform();
+	Transform m_transform;
 
 	bool active = true;
 

@@ -2,6 +2,7 @@
 
 void Game::run()
 {
+
 	init();
 
 	while (m_window->isOpen())
@@ -26,16 +27,22 @@ void Game::run()
 
 void Game::init()
 {
+	m_window->initialise();
+
 	debug_window.init(*m_window);
 
 	addKeys();
 
 	m_window->changeCamera(m_camera);
+
+	default_shader->init("Data/shaders/vertex/default.vert", "Data/shaders/fragment/default.frag");
+	
+	test_object = Object(Transform(), Mesh(default_square), Material(default_shader));
 }
 
 void Game::update()
 {
-	debug_window.addText("Test %.f %d", 1.0f, 3);
+	debug_window.addText("Test %.1f %d", 1.2f, 3);
 }
 
 void Game::render()
