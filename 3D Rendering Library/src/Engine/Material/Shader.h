@@ -157,6 +157,11 @@ public:
     glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
   }
 
+  void setProjection(const glm::mat4 &proj)
+  {
+    setMat4("projection", proj);
+  }
+
 private:
   // utility function for checking shader compilation/linking errors.
   // ------------------------------------------------------------------------

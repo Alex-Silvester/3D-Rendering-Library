@@ -7,7 +7,13 @@ Object::Object(const Transform &transform, const Mesh &mesh, const Material &mat
 	m_material = material;
 }
 
-void Object::useMaterial()
+void Object::draw(VAO vao, VBO vbo, const glm::mat4 &view, const Window *window)
 {
-	m_material.use(m_transform);
+  m_material.use(m_transform);
+
+  glBindVertexArray(vao);
+
+  m_mesh.bindVBO(vbo);
+
+  m_material.transformModel();
 }

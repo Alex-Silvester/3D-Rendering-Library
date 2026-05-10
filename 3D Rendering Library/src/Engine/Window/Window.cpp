@@ -57,6 +57,12 @@ void Window::changeCamera(const Camera &camera)
 	m_camera = std::make_unique<Camera>(camera);
 }
 
+void Window::draw(Object &object)
+{
+	glm::mat4 view = m_camera->GetViewMatrix();
+	object.draw(m_vao, m_vbo, view, this);
+}
+
 bool Window::initialise(float size_x, float size_y, const char *name)
 {
 	// glfw: initialize and configure
@@ -188,5 +194,19 @@ bool Window::processInput()
     m_camera->sprint_active = false;
   }
 	return true;
+}
+
+glm::mat4 Window::getProjection(GLFWwindow *window, const Camera &camera)
+{
+	int size_x;
+	int size_y;
+
+	glfwGetWindowSize(window, &size_x, &size_y);
+
+	return  glm::perspective(
+		glm::radians(camera.Zoom),
+		(float)size_x / (float)size_y,
+		0.1f,
+		100.0f);
 }
 

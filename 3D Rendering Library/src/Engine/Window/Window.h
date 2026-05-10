@@ -4,6 +4,7 @@
 
 #include "../Camera/Camera.h"
 #include "../Key/Key.h"
+#include "../Object/Object.h"
 
 #define DECORATE_WINDOW true
 
@@ -32,6 +33,8 @@ public:
 
 	void changeCamera(const Camera &camera);
 
+	void draw(Object &object);
+
 private:
 
 	bool initialise(float size_x = SCREEN_WIDTH, float size_y = SCREEN_HEIGHT, const char *name = "");
@@ -48,6 +51,8 @@ private:
 
 	bool processInput();
 
+	glm::mat4 getProjection(GLFWwindow *window, const Camera &camera);
+
 private:
 
 	GLFWwindow *m_window = nullptr;
@@ -55,5 +60,8 @@ private:
 	std::unique_ptr<Camera> m_camera;
 
 	float m_last_frame = 0.f, m_delta_time = 0.f;
+
+	VAO m_vao = 0;
+	VBO m_vbo = 0;
 
 };

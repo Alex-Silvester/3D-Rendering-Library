@@ -11,6 +11,7 @@ public:
 	Material() = default;
 
 	bool use(const Transform &transform);
+	void transformModel();
 
 private:
 

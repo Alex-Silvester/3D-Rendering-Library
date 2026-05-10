@@ -4,6 +4,9 @@
 
 #include "../Key/Key.h"
 
+using VAO = unsigned int;
+using VBO = unsigned int;
+
 class Mesh
 {
 public:
@@ -11,6 +14,8 @@ public:
 	Mesh() = default;
 
 	void setMesh(const std::vector<float> &verts);
+
+	void bindVBO(VBO vbo);
 
 private:
 

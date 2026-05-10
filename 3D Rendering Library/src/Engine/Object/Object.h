@@ -13,7 +13,11 @@ public:
 	Object() = default;
 	Object(const Transform &transform, const Mesh &mesh, const Material &material);
 
-	void useMaterial();
+private:
+
+	friend class Window;
+
+	void draw(VAO vao, VBO vbo, const glm::mat4 &view, const Window *window);
 
 public:
 
