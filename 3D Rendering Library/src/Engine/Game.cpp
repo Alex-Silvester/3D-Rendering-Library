@@ -10,11 +10,15 @@ void Game::run()
 
 		m_window->processInputs();
 
+		debug_window.startFrame();
+
 		update();
 
 		m_window->clear();
 
 		render();
+
+		debug_window.renderFrame();
 
 		m_window->display();
 	}
@@ -22,6 +26,8 @@ void Game::run()
 
 void Game::init()
 {
+	debug_window.init(*m_window);
+
 	addKeys();
 
 	m_window->changeCamera(m_camera);
@@ -29,12 +35,12 @@ void Game::init()
 
 void Game::update()
 {
-
+	debug_window.addText("Test %.f %d", 1.0f, 3);
 }
 
 void Game::render()
 {
-
+	
 }
 
 //This could be made more efficient with, maybe, preprocessor stuff

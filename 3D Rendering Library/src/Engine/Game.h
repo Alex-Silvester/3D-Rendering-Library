@@ -2,6 +2,7 @@
 
 #include "../Dependencies.h"
 #include "Window/Window.h"
+#include "Debugger/Debugger.h"
 
 class Game
 {
@@ -23,5 +24,7 @@ private:
 	std::shared_ptr<Window> m_window = std::make_shared<Window>();
 
 	Camera m_camera = Camera();
+
+	Debugger debug_window = Debugger("test");
 
 };
