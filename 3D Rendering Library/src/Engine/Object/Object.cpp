@@ -2,20 +2,27 @@
 
 Object::Object(const Transform &transform, const Mesh &mesh, const Material &material)
 {
-	m_transform = transform;
-	m_mesh = mesh;
-	m_material = material;
+	this->transform = transform;
+	this->mesh = mesh;
+	this->material = material;
+}
+
+void Object::setProjection(const glm::mat4 &projection)
+{
+  material.setProjection(projection);
 }
 
 void Object::draw(VAO vao, VBO vbo, const glm::mat4 &view, const Window *window)
 {
-  m_material.use(m_transform);
+  mesh.bindVBO(vbo);
+
+  material.use(transform);
+
+  material.setViewMatrix(view);
 
   glBindVertexArray(vao);
 
-  m_mesh.bindVBO(vbo);
+  material.transformModel(transform);
 
-  m_material.transformModel();
-
-  m_mesh.renderMesh();
+  mesh.renderMesh();
 }

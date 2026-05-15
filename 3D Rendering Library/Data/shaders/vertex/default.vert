@@ -14,15 +14,13 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
-uniform vec3 Position;
-uniform vec3 Scale;
-
 void main()
 {
-    FragPos = vec3(model * vec4(aPos + Position, 1.0));
+    vec4 worldPos = model * vec4(aPos, 1.0);
+    FragPos = vec3(worldPos);
     Colour = aColour;
     Normal = aNormal;  
     TexCoord = aTexCoord;
 	
-    gl_Position = projection * view * vec4(FragPos, 1.0);
-} 
+    gl_Position = projection * view * worldPos;
+}

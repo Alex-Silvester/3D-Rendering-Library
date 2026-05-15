@@ -11,12 +11,13 @@
 #define SCREEN_WIDTH 960
 #define SCREEN_HEIGHT 540
 
+#define CURSOR_MODE GLFW_CURSOR_DISABLED
+
 class Window
 {
 public:
 
 	Window() = default;
-	//Window(float size_x = SCREEN_WIDTH, float size_y = SCREEN_HEIGHT, const char *name = "");
 
 	void clear(glm::vec4 colour = glm::vec4());
 
@@ -37,7 +38,7 @@ public:
 
 	bool initialise(float size_x = SCREEN_WIDTH, float size_y = SCREEN_HEIGHT, const char *name = "");
 
-	const glm::mat4& getProjection(const Camera &camera);
+	const glm::mat4& getProjection();
 
 private:
 
@@ -53,6 +54,11 @@ private:
 
 	bool processInput();
 
+public:
+
+	VAO m_vao = 0;
+	VBO m_vbo = 0;
+
 private:
 
 	GLFWwindow *m_window = nullptr;
@@ -60,8 +66,10 @@ private:
 	Camera* m_camera = nullptr;
 
 	float m_last_frame = 0.f, m_delta_time = 0.f;
+	
+	glm::mat4 m_projection = glm::mat4(1.0f);  // Cache the projection matrix
 
-	VAO m_vao = 0;
-	VBO m_vbo = 0;
 
+	bool first_mouse = true;
+	float last_x, last_y;
 };

@@ -1,39 +1,39 @@
 #include "Material.h"
 
-Material::Material(std::shared_ptr<Shader> &shader)
+Material::Material(std::shared_ptr<Shader> &_shader)
 {
-	addShader(shader);
+	shader = _shader;
 }
 
 bool Material::use(const Transform &transform)
 {
-	if (m_shader_ptr.get() == nullptr)
+	if (shader.get() == nullptr)
 	{
 		std::cerr << "Material requires shader to use\n";
 		return false;
 	}
 
-	m_shader_ptr->use();
-
-	m_shader_ptr->setVec3("Position", transform.m_position);
-	m_shader_ptr->setVec3("Scale", transform.m_scale);
+	shader->use();
 
 	//if the material has a texture, then use it
-	if(m_texture_ptr.get() != nullptr)
-		m_texture_ptr->bindTexture();
+	if(texture.get() != nullptr)
+		texture->bindTexture();
 
 	return true;
 }
 
-void Material::transformModel()
+void Material::transformModel(const Transform &transform)
 {
-	// calculate the model matrix for each object and pass it to shader before drawing
-	glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
-	model = glm::translate(model, glm::vec3(0.f));
-	m_shader_ptr->setMat4("model", model);
+	glm::mat4 model = glm::mat4(1.0f);
+	shader->setMat4("model", model);
 }
 
-void Material::addShader(std::shared_ptr<Shader> &shader)
+void Material::setViewMatrix(const glm::mat4 &view)
 {
-	m_shader_ptr = shader;
+	shader->setMat4("view", view);
+}
+
+void Material::setProjection(const glm::mat4 &projection)
+{
+	shader->setMat4("projection", projection);
 }

@@ -47,8 +47,8 @@ void Window::changeCamera(Camera &camera)
 
 void Window::draw(Object &object)
 {
-	glm::mat4 view = m_camera->GetViewMatrix();
-	object.draw(m_vao, m_vbo, view, this);
+	object.setProjection(getProjection());
+	object.draw(m_vao, m_vbo, m_camera->GetViewMatrix(), this);
 }
 
 bool Window::initialise(float size_x, float size_y, const char *name)
@@ -68,15 +68,21 @@ bool Window::initialise(float size_x, float size_y, const char *name)
 
 	glfwSetWindowUserPointer(m_window, reinterpret_cast<void *>(this));
 
+	glDisable(GL_CULL_FACE);
+	glEnable(GL_DEPTH_TEST);
+	
+	// Set initial viewport
+	glViewport(0, 0, (int)size_x, (int)size_y);
+
 	glGenVertexArrays(1, &m_vao);
 	glGenBuffers(1, &m_vbo);
-
+	
 	glBindVertexArray(m_vao);
-
+	
 	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-
+	
 	//position(3 floats), colour(4 floats), normal(3 floats), texture coordinate(2 floats)
-
+	
 	// position attribute
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void *)0);
 	glEnableVertexAttribArray(0);
@@ -96,7 +102,7 @@ bool Window::initialise(float size_x, float size_y, const char *name)
 GLFWwindow *Window::createWindow(float size_x, float size_y, const char *name)
 {
 	GLFWwindow *window = makeWindow(size_x, size_y, name);
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	glfwSetInputMode(window, GLFW_CURSOR, CURSOR_MODE);
 	return window;
 }
 
@@ -143,7 +149,23 @@ void Window::mouse_callback(GLFWwindow *window, double xposIn, double yposIn)
 
 void Window::mouseEvent(double xposIn, double yposIn)
 {
-	m_camera->ProcessMouseMovement(xposIn, yposIn);
+	float xpos = static_cast<float>(xposIn);
+	float ypos = static_cast<float>(yposIn);
+
+	if (first_mouse)
+	{
+		last_x = xpos;
+		last_y = ypos;
+		first_mouse = false;
+	}
+
+	float xoffset = xpos - last_x;
+	float yoffset = last_y - ypos; // reversed since y-coordinates go from bottom to top
+
+	last_x = xpos;
+	last_y = ypos;
+
+	m_camera->ProcessMouseMovement(xoffset, yoffset);
 }
 
 void Window::framebuffer_size_callback(GLFWwindow *window, int width, int height)
@@ -215,17 +237,25 @@ bool Window::processInput()
 	return true;
 }
 
-const glm::mat4& Window::getProjection(const Camera &camera)
+const glm::mat4& Window::getProjection()
 {
+	if (m_camera == nullptr)
+	{
+		std::cerr << "Window Requires camera to get projection\n";
+		return glm::mat4();
+	}
+
 	int size_x;
 	int size_y;
 
 	glfwGetWindowSize(m_window, &size_x, &size_y);
 
-	return  glm::perspective(
-		glm::radians(camera.Zoom),
+	m_projection = glm::perspective(
+		glm::radians(m_camera->Zoom),
 		(float)size_x / (float)size_y,
 		0.1f,
 		100.0f);
+	
+	return m_projection;
 }
 

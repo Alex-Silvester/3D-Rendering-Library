@@ -5,17 +5,17 @@
 #include "../Key/Key.h"
 
 using VAO = unsigned int;
-using VBO = unsigned int;
+using VBO = unsigned int; 
 
 static const std::vector<float> default_square =
 {
-		0.5f, 0.5f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   0.f, 0.f,
-	 -0.5f, 0.5f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   0.f, 0.f,
-	 -0.5f,-0.5f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   0.f, 0.f,
-																						 							   		  	
-	 -0.5f,-0.5f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   0.f, 0.f,
-		0.5f,-0.5f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   0.f, 0.f,
-		0.5f, 0.5f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   0.f, 0.f,
+		1.f, 1.f, -1.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   0.f, 0.f,
+	 -1.f, 1.f, -1.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   0.f, 0.f,
+	 -1.f,-1.f, -1.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   0.f, 0.f,
+													 							   		  	
+	-1.f,-1.f, -1.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   0.f, 0.f,
+	 1.f,-1.f, -1.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   0.f, 0.f,
+	 1.f, 1.f, -1.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   0.f, 0.f,
 };
 
 class Mesh
@@ -24,6 +24,11 @@ public:
 
 	Mesh() = default;
 	Mesh(const std::vector<float> &verts);
+
+	void operator=(const std::vector<float> &verts)
+	{
+		setMesh(verts);
+	}
 
 	void setMesh(const std::vector<float> &verts);
 

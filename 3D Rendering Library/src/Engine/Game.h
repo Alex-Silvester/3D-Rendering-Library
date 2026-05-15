@@ -22,13 +22,14 @@ private:
 private:
 
 	std::shared_ptr<Window> m_window = std::make_shared<Window>();
-
+	
 	Camera m_camera = Camera();
-
+	
 	Debugger debug_window = Debugger("test");
-
+	
 	std::shared_ptr<Shader> default_shader = std::make_shared<Shader>();
-
+	
 	Object test_object;
+
 
 };

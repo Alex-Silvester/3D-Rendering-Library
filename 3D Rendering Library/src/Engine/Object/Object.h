@@ -6,12 +6,16 @@
 #include "../Mesh/Mesh.h"
 #include "../Material/Material.h"
 
+class Window;
+
 class Object
 {
 public:
 
 	Object() = default;
 	Object(const Transform &transform, const Mesh &mesh, const Material &material);
+
+	void setProjection(const glm::mat4 &projection);
 
 private:
 
@@ -21,14 +25,9 @@ private:
 
 public:
 
-	Transform m_transform;
+	Transform transform = Transform();
+	Mesh mesh = Mesh();
+	Material material = Material();
 
 	bool active = true;
-
-private:
-
-	Mesh m_mesh = Mesh();
-
-	Material m_material = Material();
-
 };

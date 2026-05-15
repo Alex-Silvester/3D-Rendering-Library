@@ -1,45 +1,48 @@
 #include "Game.h"
+#include "Mesh/Mesh.h"
 
 void Game::run()
 {
+  init();
 
-	init();
+  while (m_window->isOpen())
+  {
+    m_window->pollEvents();
+    m_window->processInputs();
 
-	while (m_window->isOpen())
-	{
-		m_window->pollEvents();
+    debug_window.startFrame();
 
-		m_window->processInputs();
+    update();
 
-		debug_window.startFrame();
+    m_window->clear();
 
-		update();
+    render();
 
-		m_window->clear();
+    debug_window.renderFrame();
 
-		render();
+    m_window->display();
+  }
 
-		debug_window.renderFrame();
+  glDeleteVertexArrays(1, &m_window->m_vao);
+  glDeleteBuffers(1, &m_window->m_vbo);
 
-		m_window->display();
-	}
+  glfwTerminate();
 }
 
 void Game::init()
 {
 	m_window->initialise();
-
-	debug_window.init(*m_window);
-
-	addKeys();
-
-	m_window->changeCamera(m_camera);
-
-	default_shader->init("Data/shaders/vertex/default.vert", "Data/shaders/fragment/default.frag");
-	default_shader->setProjection(m_window->getProjection(m_camera));
+  m_window->changeCamera(m_camera);
 	
-	test_object = Object(Transform(), Mesh(default_square), Material(default_shader));
-	test_object.m_transform.m_position.z = -2.f;
+	debug_window.init(*m_window);
+	
+	addKeys();
+	
+	default_shader->init("Data/shaders/vertex/default.vert", "Data/shaders/fragment/default.frag");
+  default_shader->setProjection(m_window->getProjection());
+	
+  test_object.mesh = default_square;
+  test_object.material.shader = default_shader;
 }
 
 void Game::update()
@@ -49,13 +52,12 @@ void Game::update()
 
 void Game::render()
 {
-	m_window->draw(test_object);
+  m_window->draw(test_object);
 }
 
 //This could be made more efficient with, maybe, preprocessor stuff
 void Game::addKeys()
 {
-
 		Key<GLFW_KEY_ESCAPE      >::addWindow(m_window);
 		Key<GLFW_KEY_W					 >::addWindow(m_window);
 		Key<GLFW_KEY_S					 >::addWindow(m_window);
