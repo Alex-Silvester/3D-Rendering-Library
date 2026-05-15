@@ -149,6 +149,8 @@ void Window::mouse_callback(GLFWwindow *window, double xposIn, double yposIn)
 
 void Window::mouseEvent(double xposIn, double yposIn)
 {
+	if (glfwGetInputMode(m_window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL) return;
+
 	float xpos = static_cast<float>(xposIn);
 	float ypos = static_cast<float>(yposIn);
 
@@ -186,6 +188,20 @@ bool Window::processInput()
     glfwSetWindowShouldClose(m_window, true);
   }
 
+	if (Key<GLFW_KEY_TAB>::pressed())
+	{
+		if (glfwGetInputMode(m_window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL)
+		{
+			glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		}
+		else
+		{
+			glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+		}
+	}
+
+	if (glfwGetInputMode(m_window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL) return true;
+
 	if (m_camera == nullptr)
 	{
 		std::cerr << "Camera not set\n";
@@ -197,6 +213,7 @@ bool Window::processInput()
   {
     m_camera->ProcessKeyboard(FORWARD, m_delta_time);
   }
+
   if (Key<GLFW_KEY_S>::held())
   {
     m_camera->ProcessKeyboard(BACKWARD, m_delta_time);
@@ -207,7 +224,8 @@ bool Window::processInput()
   {
     m_camera->ProcessKeyboard(LEFT, m_delta_time);
   }
-  if (Key<GLFW_KEY_D>::held())
+
+	if (Key<GLFW_KEY_D>::held())
   {
     m_camera->ProcessKeyboard(RIGHT, m_delta_time);
   }
@@ -217,7 +235,8 @@ bool Window::processInput()
   {
     m_camera->ProcessKeyboard(UP, m_delta_time);
   }
-  if (Key<GLFW_KEY_LEFT_SHIFT>::held())
+
+	if (Key<GLFW_KEY_LEFT_SHIFT>::held())
   {
     m_camera->ProcessKeyboard(DOWN, m_delta_time);
   }
@@ -227,12 +246,10 @@ bool Window::processInput()
   {
     m_camera->sprint_active = true;
   }
-  if (Key<GLFW_KEY_LEFT_CONTROL>::released())
+  else if (Key<GLFW_KEY_LEFT_CONTROL>::released())
   {
     m_camera->sprint_active = false;
   }
-
-	//std::cout << m_camera->Position.x << " " << m_camera->Position.y << " " << m_camera->Position.z << "\n";
 
 	return true;
 }

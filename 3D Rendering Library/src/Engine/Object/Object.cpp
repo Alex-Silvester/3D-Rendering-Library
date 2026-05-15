@@ -17,12 +17,13 @@ void Object::draw(VAO vao, VBO vbo, const glm::mat4 &view, const Window *window)
   mesh.bindVBO(vbo);
 
   material.use(transform);
-
   material.setViewMatrix(view);
 
   glBindVertexArray(vao);
 
-  material.transformModel(transform);
+  glm::mat4 model = glm::mat4(1.0f);
+  transform.transformModel(model);
+  material.setModelTransform(model);
 
   mesh.renderMesh();
 }

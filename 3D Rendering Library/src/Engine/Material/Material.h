@@ -12,7 +12,7 @@ public:
 	Material(std::shared_ptr<Shader> &shader);
 
 	bool use(const Transform &transform);
-	void transformModel(const Transform &transform);
+	void setModelTransform(const glm::mat4 &transform);
 	void setViewMatrix(const glm::mat4 &view);
 	void setProjection(const glm::mat4 &projection);
 

@@ -3,7 +3,8 @@
 
 void Game::run()
 {
-  init();
+  windowInit();
+  gameInit();
 
   while (m_window->isOpen())
   {
@@ -12,7 +13,7 @@ void Game::run()
 
     debug_window.startFrame();
 
-    update();
+    update(m_window->getDeltaTime());
 
     m_window->clear();
 
@@ -29,7 +30,7 @@ void Game::run()
   glfwTerminate();
 }
 
-void Game::init()
+void Game::windowInit()
 {
 	m_window->initialise();
   m_window->changeCamera(m_camera);
@@ -37,17 +38,25 @@ void Game::init()
 	debug_window.init(*m_window);
 	
 	addKeys();
-	
-	default_shader->init("Data/shaders/vertex/default.vert", "Data/shaders/fragment/default.frag");
-  default_shader->setProjection(m_window->getProjection());
-	
-  test_object.mesh = default_square;
-  test_object.material.shader = default_shader;
 }
 
-void Game::update()
+void Game::gameInit()
 {
-	debug_window.addText("Camera Pos [%.4f, %.4f, %.4f]", m_camera.Position.x, m_camera.Position.y, m_camera.Position.z);
+  default_shader->init("Data/shaders/vertex/default.vert", "Data/shaders/fragment/default.frag");
+  default_shader->setProjection(m_window->getProjection());
+
+  test_object.mesh = default_square;
+  test_object.material.shader = default_shader;
+
+  test_object.material.colour.r = 0.f;
+}
+
+void Game::update(float dt)
+{
+  debug_window.addText("FPS: %.f", 1.f / dt);
+	debug_window.addText("Camera Pos: [%.4f, %.4f, %.4f]", m_camera.Position.x, m_camera.Position.y, m_camera.Position.z);
+
+  test_object.transform.rotation += dt;
 }
 
 void Game::render()
@@ -66,4 +75,5 @@ void Game::addKeys()
 		Key<GLFW_KEY_SPACE			 >::addWindow(m_window);
 		Key<GLFW_KEY_LEFT_SHIFT	 >::addWindow(m_window);
 		Key<GLFW_KEY_LEFT_CONTROL>::addWindow(m_window);
+    Key<GLFW_KEY_TAB         >::addWindow(m_window);
 }

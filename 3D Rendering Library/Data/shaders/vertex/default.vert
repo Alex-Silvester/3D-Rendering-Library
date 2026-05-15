@@ -6,7 +6,7 @@ layout (location = 2) in vec3 aNormal;
 layout (location = 3) in vec2 aTexCoord;
 
 out vec3 FragPos;
-out vec4 Colour;
+out vec4 MeshColour;
 out vec3 Normal;
 out vec2 TexCoord;
 
@@ -14,11 +14,13 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
+uniform vec3 position;
+
 void main()
 {
     vec4 worldPos = model * vec4(aPos, 1.0);
     FragPos = vec3(worldPos);
-    Colour = aColour;
+    MeshColour = aColour;
     Normal = aNormal;  
     TexCoord = aTexCoord;
 	

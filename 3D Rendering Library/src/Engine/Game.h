@@ -12,10 +12,11 @@ public:
 
 private:
 
-	void init();
+	void windowInit();
 
-	void update();
-	void render();
+	virtual void gameInit();
+	virtual void update(float dt);
+	virtual void render();
 
 	void addKeys();
 

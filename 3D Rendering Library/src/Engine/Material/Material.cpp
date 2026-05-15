@@ -15,6 +15,8 @@ bool Material::use(const Transform &transform)
 
 	shader->use();
 
+	shader->setVec4("colour", colour.toVec4());
+
 	//if the material has a texture, then use it
 	if(texture.get() != nullptr)
 		texture->bindTexture();
@@ -22,9 +24,8 @@ bool Material::use(const Transform &transform)
 	return true;
 }
 
-void Material::transformModel(const Transform &transform)
+void Material::setModelTransform(const glm::mat4 &model)
 {
-	glm::mat4 model = glm::mat4(1.0f);
 	shader->setMat4("model", model);
 }
 
