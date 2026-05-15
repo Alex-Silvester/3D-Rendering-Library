@@ -1,20 +1,40 @@
 #include "Material.h"
 
+Material::Material(std::shared_ptr<Shader> &_shader)
+{
+	shader = _shader;
+}
+
 bool Material::use(const Transform &transform)
 {
-	if (m_shader_ptr.get() == nullptr)
+	if (shader.get() == nullptr)
 	{
 		std::cerr << "Material requires shader to use\n";
 		return false;
 	}
 
-	m_shader_ptr->use();
+	shader->use();
 
-	//TODO: Set position and scale here when shaders made
+	shader->setVec4("colour", colour.toVec4());
 
 	//if the material has a texture, then use it
-	if(m_texture_ptr.get() != nullptr)
-		m_texture_ptr->bindTexture();
+	if(texture.get() != nullptr)
+		texture->bindTexture();
 
 	return true;
+}
+
+void Material::setModelTransform(const glm::mat4 &model)
+{
+	shader->setMat4("model", model);
+}
+
+void Material::setViewMatrix(const glm::mat4 &view)
+{
+	shader->setMat4("view", view);
+}
+
+void Material::setProjection(const glm::mat4 &projection)
+{
+	shader->setMat4("projection", projection);
 }

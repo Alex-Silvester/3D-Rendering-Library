@@ -4,20 +4,22 @@
 
 #include "../Camera/Camera.h"
 #include "../Key/Key.h"
+#include "../Object/Object.h"
 
 #define DECORATE_WINDOW true
 
 #define SCREEN_WIDTH 960
 #define SCREEN_HEIGHT 540
 
+#define CURSOR_MODE GLFW_CURSOR_DISABLED
+
 class Window
 {
 public:
 
-	Window(float size_x = SCREEN_WIDTH, float size_y = SCREEN_HEIGHT, const char *name = "");
+	Window() = default;
 
 	void clear(glm::vec4 colour = glm::vec4());
-	void draw();
 
 	void display();
 	
@@ -30,11 +32,15 @@ public:
 
 	[[nodiscard]] GLFWwindow* glfwWindow();
 
-	void changeCamera(const Camera &camera);
+	void changeCamera(Camera &camera);
 
-private:
+	void draw(Object &object);
 
 	bool initialise(float size_x = SCREEN_WIDTH, float size_y = SCREEN_HEIGHT, const char *name = "");
+
+	const glm::mat4& getProjection();
+
+private:
 
 	GLFWwindow *createWindow(float size_x = SCREEN_WIDTH, float size_y = SCREEN_HEIGHT, const char *name = "");
 
@@ -42,18 +48,28 @@ private:
 
 	static void mouse_callback(GLFWwindow *window, double xposIn, double yposIn);
 
-	void mouseEvent(double xposIn, double yposIn) {}
+	void mouseEvent(double xposIn, double yposIn);
 
 	static void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 
 	bool processInput();
 
+public:
+
+	VAO m_vao = 0;
+	VBO m_vbo = 0;
+
 private:
 
 	GLFWwindow *m_window = nullptr;
 
-	std::unique_ptr<Camera> m_camera;
+	Camera* m_camera = nullptr;
 
 	float m_last_frame = 0.f, m_delta_time = 0.f;
+	
+	glm::mat4 m_projection = glm::mat4(1.0f);  // Cache the projection matrix
 
+
+	bool first_mouse = true;
+	float last_x, last_y;
 };

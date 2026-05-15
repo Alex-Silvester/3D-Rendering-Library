@@ -1,21 +1,9 @@
 #include "Window.h"
 
-Window::Window(float size_x, float size_y, const char *name)
-{
-	if (!initialise(size_x, size_y, name))
-	{
-		std::cerr << "Failed to initialise Window";
-	}
-}
-
 void Window::clear(glm::vec4 colour)
 {
 	glClearColor(colour.x, colour.y, colour.z, colour.w);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-}
-
-void Window::draw()
-{
 }
 
 void Window::display()
@@ -52,9 +40,15 @@ GLFWwindow *Window::glfwWindow()
   return m_window;
 }
 
-void Window::changeCamera(const Camera &camera)
+void Window::changeCamera(Camera &camera)
 {
-	m_camera = std::make_unique<Camera>(camera);
+	m_camera = &camera;
+}
+
+void Window::draw(Object &object)
+{
+	object.setProjection(getProjection());
+	object.draw(m_vao, m_vbo, m_camera->GetViewMatrix(), this);
 }
 
 bool Window::initialise(float size_x, float size_y, const char *name)
@@ -71,16 +65,36 @@ bool Window::initialise(float size_x, float size_y, const char *name)
 #endif
 
 	m_window = createWindow(size_x, size_y, name);
+
 	glfwSetWindowUserPointer(m_window, reinterpret_cast<void *>(this));
 
+	glDisable(GL_CULL_FACE);
+	glEnable(GL_DEPTH_TEST);
+	
+	// Set initial viewport
+	glViewport(0, 0, (int)size_x, (int)size_y);
 
-	// glad: load all OpenGL function pointers
-	// ---------------------------------------
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-	{
-		std::cout << "Failed to initialize GLAD" << std::endl;
-		return false;
-	}
+	glGenVertexArrays(1, &m_vao);
+	glGenBuffers(1, &m_vbo);
+	
+	glBindVertexArray(m_vao);
+	
+	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+	
+	//position(3 floats), colour(4 floats), normal(3 floats), texture coordinate(2 floats)
+	
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void *)0);
+	glEnableVertexAttribArray(0);
+	// colour attribute
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void *)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+	// normal attribute
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void *)(7 * sizeof(float)));
+	glEnableVertexAttribArray(2);
+	// texture attribute
+	glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void *)(10 * sizeof(float)));
+	glEnableVertexAttribArray(3);
 
 	return true;
 }
@@ -88,7 +102,7 @@ bool Window::initialise(float size_x, float size_y, const char *name)
 GLFWwindow *Window::createWindow(float size_x, float size_y, const char *name)
 {
 	GLFWwindow *window = makeWindow(size_x, size_y, name);
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	glfwSetInputMode(window, GLFW_CURSOR, CURSOR_MODE);
 	return window;
 }
 
@@ -106,6 +120,15 @@ GLFWwindow *Window::makeWindow(float size_x, float size_y, const char *name)
 		return nullptr;
 	}
 	glfwMakeContextCurrent(window);
+
+	// glad: load all OpenGL function pointers
+	// ---------------------------------------
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	{
+		std::cout << "Failed to initialize GLAD" << std::endl;
+		//return false;
+	}
+
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 	glfwSetCursorPosCallback(window, mouse_callback);
 
@@ -122,6 +145,29 @@ void Window::mouse_callback(GLFWwindow *window, double xposIn, double yposIn)
 	{
 		user_window->mouseEvent(xposIn, yposIn);
 	}
+}
+
+void Window::mouseEvent(double xposIn, double yposIn)
+{
+	if (glfwGetInputMode(m_window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL) return;
+
+	float xpos = static_cast<float>(xposIn);
+	float ypos = static_cast<float>(yposIn);
+
+	if (first_mouse)
+	{
+		last_x = xpos;
+		last_y = ypos;
+		first_mouse = false;
+	}
+
+	float xoffset = xpos - last_x;
+	float yoffset = last_y - ypos; // reversed since y-coordinates go from bottom to top
+
+	last_x = xpos;
+	last_y = ypos;
+
+	m_camera->ProcessMouseMovement(xoffset, yoffset);
 }
 
 void Window::framebuffer_size_callback(GLFWwindow *window, int width, int height)
@@ -142,7 +188,21 @@ bool Window::processInput()
     glfwSetWindowShouldClose(m_window, true);
   }
 
-	if (m_camera.get() == nullptr)
+	if (Key<GLFW_KEY_TAB>::pressed())
+	{
+		if (glfwGetInputMode(m_window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL)
+		{
+			glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		}
+		else
+		{
+			glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+		}
+	}
+
+	if (glfwGetInputMode(m_window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL) return true;
+
+	if (m_camera == nullptr)
 	{
 		std::cerr << "Camera not set\n";
 		return false;
@@ -153,6 +213,7 @@ bool Window::processInput()
   {
     m_camera->ProcessKeyboard(FORWARD, m_delta_time);
   }
+
   if (Key<GLFW_KEY_S>::held())
   {
     m_camera->ProcessKeyboard(BACKWARD, m_delta_time);
@@ -163,7 +224,8 @@ bool Window::processInput()
   {
     m_camera->ProcessKeyboard(LEFT, m_delta_time);
   }
-  if (Key<GLFW_KEY_D>::held())
+
+	if (Key<GLFW_KEY_D>::held())
   {
     m_camera->ProcessKeyboard(RIGHT, m_delta_time);
   }
@@ -173,7 +235,8 @@ bool Window::processInput()
   {
     m_camera->ProcessKeyboard(UP, m_delta_time);
   }
-  if (Key<GLFW_KEY_LEFT_SHIFT>::held())
+
+	if (Key<GLFW_KEY_LEFT_SHIFT>::held())
   {
     m_camera->ProcessKeyboard(DOWN, m_delta_time);
   }
@@ -183,10 +246,33 @@ bool Window::processInput()
   {
     m_camera->sprint_active = true;
   }
-  if (Key<GLFW_KEY_LEFT_CONTROL>::released())
+  else if (Key<GLFW_KEY_LEFT_CONTROL>::released())
   {
     m_camera->sprint_active = false;
   }
+
 	return true;
+}
+
+const glm::mat4& Window::getProjection()
+{
+	if (m_camera == nullptr)
+	{
+		std::cerr << "Window Requires camera to get projection\n";
+		return glm::mat4();
+	}
+
+	int size_x;
+	int size_y;
+
+	glfwGetWindowSize(m_window, &size_x, &size_y);
+
+	m_projection = glm::perspective(
+		glm::radians(m_camera->Zoom),
+		(float)size_x / (float)size_y,
+		0.1f,
+		100.0f);
+	
+	return m_projection;
 }
 

@@ -1,7 +1,7 @@
 #ifndef SHADER_H
 #define SHADER_H
 
-#define CHECK_ERRORS false
+#define CHECK_ERRORS true
 
 #include "../../Dependencies.h"
 
@@ -11,6 +11,9 @@ struct Colour
 public:
   Colour(float _r, float _g, float _b, float _a = 1.f) : r(_r), g(_g), b(_b), a(_a) {}
   Colour(const glm::vec4 &c) : r(c.x), g(c.y), b(c.z), a(c.w) {}
+
+  glm::vec4 toVec4() { return { r,g,b,a }; }
+
 public:
   float r, g, b, a;
 };
@@ -25,6 +28,9 @@ public:
   // ------------------------------------------------------------------------
   void init(const char *vertexPath, const char *fragmentPath)
   {
+    if (!std::filesystem::exists(vertexPath)) printf("vertex path doesn't exist");
+    if (!std::filesystem::exists(fragmentPath)) printf("fragment path doesn't exits");
+
     // 1. retrieve the vertex/fragment source code from filePath
     std::string vertexCode;
     std::string fragmentCode;
@@ -155,6 +161,11 @@ public:
   void setMat4(const std::string &name, const glm::mat4 &mat) const
   {
     glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
+  }
+
+  void setProjection(const glm::mat4 &proj)
+  {
+    setMat4("projection", proj);
   }
 
 private:
