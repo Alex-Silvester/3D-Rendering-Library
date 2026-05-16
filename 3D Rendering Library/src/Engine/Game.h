@@ -4,6 +4,8 @@
 #include "Window/Window.h"
 #include "Debugger/Debugger.h"
 
+#include "Object/Sphere/Sphere.h"
+
 class Game
 {
 public:
@@ -32,5 +34,5 @@ private:
 	
 	Object test_object;
 
-
+	Sphere test_sphere;
 };

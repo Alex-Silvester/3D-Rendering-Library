@@ -17,11 +17,18 @@ public:
 
 	void setProjection(const glm::mat4 &projection);
 
+	void move(const glm::vec3 &dir);
+
+protected:
+
+	virtual void passToShader();
+
 private:
 
 	friend class Window;
 
 	void draw(VAO vao, VBO vbo, const glm::mat4 &view, const Window *window);
+
 
 public:
 

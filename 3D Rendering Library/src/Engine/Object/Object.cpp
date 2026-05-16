@@ -12,11 +12,17 @@ void Object::setProjection(const glm::mat4 &projection)
   material.setProjection(projection);
 }
 
+void Object::move(const glm::vec3 &dir)
+{
+  transform.position += dir;
+}
+
 void Object::draw(VAO vao, VBO vbo, const glm::mat4 &view, const Window *window)
 {
   mesh.bindVBO(vbo);
 
   material.use(transform);
+  passToShader();
   material.setViewMatrix(view);
 
   glBindVertexArray(vao);
@@ -27,3 +33,6 @@ void Object::draw(VAO vao, VBO vbo, const glm::mat4 &view, const Window *window)
 
   mesh.renderMesh();
 }
+
+void Object::passToShader()
+{}

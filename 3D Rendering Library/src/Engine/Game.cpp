@@ -42,6 +42,9 @@ void Game::windowInit()
 
 void Game::gameInit()
 {
+  test_sphere.init();
+  test_sphere.move({ 0,0,-5 });
+
   default_shader->init("Data/shaders/vertex/default.vert", "Data/shaders/fragment/default.frag");
   default_shader->setProjection(m_window->getProjection());
 
@@ -49,6 +52,8 @@ void Game::gameInit()
   test_object.material.shader = default_shader;
 
   test_object.material.colour.r = 0.f;
+
+  test_object.move({ 4,0,-5 });
 }
 
 void Game::update(float dt)
@@ -62,6 +67,7 @@ void Game::update(float dt)
 void Game::render()
 {
   m_window->draw(test_object);
+  m_window->draw(test_sphere);
 }
 
 //This could be made more efficient with, maybe, preprocessor stuff
