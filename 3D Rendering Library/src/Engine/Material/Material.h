@@ -21,7 +21,7 @@ private:
 public:
 
 	Colour colour = Colour(1.f, 1.f, 1.f);
-	std::shared_ptr<Shader> shader;
+	std::shared_ptr<Shader> shader = nullptr;
 	std::shared_ptr<Texture> texture;
 
 private:
