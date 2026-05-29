@@ -17,11 +17,22 @@ void Object::move(const glm::vec3 &dir)
   transform.position += dir;
 }
 
-void Object::draw(VAO vao, VBO vbo, const glm::mat4 &view, const Window *window)
+void Object::draw(VAO vao, VBO vbo, const glm::mat4 &view, const Camera *camera, const Window *window)
 {
   mesh.bindVBO(vbo);
 
   material.use(transform);
+
+  if(light != nullptr)
+  {
+    material.shader->setVec3("light_pos", *light->position);
+    material.shader->setFloat("light_intensity", light->intensity);
+    material.shader->setVec3("obj_position", transform.position);
+    material.shader->setVec3("camera_pos", camera->Position);
+  }
+
+  material.shader->setFloat("ambient_light", light == nullptr ? 1.0f : ambient_light_intensity);
+
   passToShader();
   material.setViewMatrix(view);
 

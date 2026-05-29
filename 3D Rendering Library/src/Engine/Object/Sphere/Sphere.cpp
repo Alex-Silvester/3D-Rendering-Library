@@ -15,14 +15,12 @@ void Sphere::init()
 
 	material.shader = m_sphere_shader;
 
-	mesh = default_square;
+	mesh = default_sphere;
 }
 
 void Sphere::passToShader()
 {
 	m_sphere_shader->setFloat("radius", radius);
-
-	ImGui::SliderFloat(" ", &aa_flag, 0.f, 1.f, "%.3f", ImGuiSliderFlags_Logarithmic);
-
+	m_sphere_shader->setVec3("scale", transform.scale);
 	m_sphere_shader->setFloat("aa_dist", aa_flag);
 }

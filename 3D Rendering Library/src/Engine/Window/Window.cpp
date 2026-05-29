@@ -48,7 +48,7 @@ void Window::changeCamera(Camera &camera)
 void Window::draw(Object &object)
 {
 	object.setProjection(getProjection());
-	object.draw(m_vao, m_vbo, m_camera->GetViewMatrix(), this);
+	object.draw(m_vao, m_vbo, m_camera->GetViewMatrix(), m_camera, this);
 }
 
 bool Window::initialise(float size_x, float size_y, const char *name)

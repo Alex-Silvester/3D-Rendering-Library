@@ -4,7 +4,7 @@
 #include "Window/Window.h"
 #include "Debugger/Debugger.h"
 
-#include "Object/Sphere/Sphere.h"
+#include "Object/Light/Light.h"
 
 class Game
 {
@@ -35,4 +35,6 @@ private:
 	Object test_object;
 
 	Sphere test_sphere;
+
+	Light test_light;
 };

@@ -5,6 +5,8 @@
 #include "../Transform/Transform.h"
 #include "../Mesh/Mesh.h"
 #include "../Material/Material.h"
+#include "../Object/Light/LightSource.h"
+#include "../Camera/Camera.h"
 
 class Window;
 
@@ -27,7 +29,7 @@ private:
 
 	friend class Window;
 
-	void draw(VAO vao, VBO vbo, const glm::mat4 &view, const Window *window);
+	void draw(VAO vao, VBO vbo, const glm::mat4 &view, const Camera *camera, const Window *window);
 
 
 public:
@@ -35,6 +37,9 @@ public:
 	Transform transform = Transform();
 	Mesh mesh = Mesh();
 	Material material = Material();
+
+	LightSource *light = nullptr;
+	float ambient_light_intensity = 1.f;
 
 	bool active = true;
 };

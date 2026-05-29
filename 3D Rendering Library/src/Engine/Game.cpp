@@ -45,6 +45,12 @@ void Game::gameInit()
   test_sphere.init();
   test_sphere.move({ 0,0,-5 });
 
+  test_light.init();
+  test_light.move({ 0.f,3.f, 3.f });
+  test_light.transform.scale = { 0.2f,0.2f,0.2f };
+  test_light.source.intensity = 1.f;
+  
+
   default_shader->init("Data/shaders/vertex/default.vert", "Data/shaders/fragment/default.frag");
   default_shader->setProjection(m_window->getProjection());
 
@@ -54,6 +60,10 @@ void Game::gameInit()
   test_object.material.colour.r = 0.f;
 
   test_object.move({ 4,0,-5 });
+
+  test_light.source.intensity = 0.1f;
+  test_object.light = &test_light.source;
+  test_light.light = &test_light.source;
 }
 
 void Game::update(float dt)
@@ -68,6 +78,7 @@ void Game::render()
 {
   m_window->draw(test_object);
   m_window->draw(test_sphere);
+  m_window->draw(test_light);
 }
 
 //This could be made more efficient with, maybe, preprocessor stuff

@@ -14,24 +14,27 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
+uniform vec3 scale;
+
 void main()
 {
 	mat4 model_view = view * model;
 	
-	model_view[0][0] = 1;
+	model_view[0][0] = scale.x;
 	model_view[0][1] = 0;
 	model_view[0][2] = 0;
 	
 	model_view[1][0] = 0;
-	model_view[1][1] = 1; 
+	model_view[1][1] = scale.y; 
 	model_view[1][2] = 0;
 	
 	model_view[2][0] = 0;
 	model_view[2][1] = 0;
-	model_view[2][2] = 1;
+	model_view[2][2] = scale.z;
 	
 	FragPos = aPos;
 	gl_Position = projection * model_view * vec4(aPos, 1.0);
 	
 	MeshColour = aColour;
+	Normal = aNormal; 
 }

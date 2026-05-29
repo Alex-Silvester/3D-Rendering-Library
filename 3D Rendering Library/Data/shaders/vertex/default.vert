@@ -19,7 +19,7 @@ void main()
     vec4 worldPos = model * vec4(aPos, 1.0);
     FragPos = vec3(worldPos);
     MeshColour = aColour;
-    Normal = aNormal;  
+    Normal = abs((model * vec4(aNormal, 0.0)).xyz);  
     TexCoord = aTexCoord;
 	
     gl_Position = projection * view * worldPos;

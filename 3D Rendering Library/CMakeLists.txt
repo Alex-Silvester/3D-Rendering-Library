@@ -74,7 +74,7 @@ add_executable (Renderer
 "src/Engine/Key/Key.h" 
 "src/Engine/Key/Key.cpp"
 "src/Engine/Debugger/Debugger.h"
-"src/Engine/Debugger/Debugger.cpp" "src/Engine/Object/Sphere/Sphere.h" "src/Engine/Object/Sphere/Sphere.cpp")
+"src/Engine/Debugger/Debugger.cpp" "src/Engine/Object/Sphere/Sphere.h" "src/Engine/Object/Sphere/Sphere.cpp" "src/Engine/Object/Light/Light.h" "src/Engine/Object/Light/Light.cpp" "src/Engine/Object/Light/LightSource.h")
 
 target_link_libraries(Renderer PRIVATE glfw)
 target_link_libraries(Renderer PRIVATE glm::glm)

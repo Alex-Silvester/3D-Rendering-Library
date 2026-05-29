@@ -12,13 +12,11 @@ private:
 
 	void passToShader() override;
 
-public:
-
-	float radius = 1.f;
-	float aa_flag = 0.f;
-
 private:
 
+
+	float radius = 1.f;
+	float aa_flag = 0.03f;
 	inline static std::shared_ptr<Shader> m_sphere_shader;
 
 };
