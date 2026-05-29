@@ -31,6 +31,7 @@ private:
 	std::shared_ptr<Shader> default_shader = std::make_shared<Shader>();
 	
 	Object test_object;
+	Object transparent_object;
 
 
 };

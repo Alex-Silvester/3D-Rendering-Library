@@ -96,6 +96,9 @@ bool Window::initialise(float size_x, float size_y, const char *name)
 	glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void *)(10 * sizeof(float)));
 	glEnableVertexAttribArray(3);
 
+	glEnable(GL_BLEND);
+	glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
+
 	return true;
 }
 

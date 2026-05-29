@@ -49,6 +49,12 @@ void Game::gameInit()
   test_object.material.shader = default_shader;
 
   test_object.material.colour.r = 0.f;
+
+  transparent_object.mesh = default_square;
+  transparent_object.material.shader = default_shader;
+
+  transparent_object.material.colour = Colour(1.f, 0.f, 0.f, 0.3f);
+  transparent_object.transform.position = test_object.transform.position + glm::vec3(0, 0, 1);
 }
 
 void Game::update(float dt)
@@ -59,9 +65,11 @@ void Game::update(float dt)
   test_object.transform.rotation += dt;
 }
 
+//Note: when rendering transparent objects, render them last from back to front to get the transparency to work properly
 void Game::render()
 {
   m_window->draw(test_object);
+  m_window->draw(transparent_object);
 }
 
 //This could be made more efficient with, maybe, preprocessor stuff
