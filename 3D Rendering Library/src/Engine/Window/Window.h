@@ -34,6 +34,8 @@ public:
 
 	void changeCamera(Camera &camera);
 
+	Camera &getCurrentCamera();
+
 	void draw(Object &object);
 
 	bool initialise(float size_x = SCREEN_WIDTH, float size_y = SCREEN_HEIGHT, const char *name = "");

@@ -74,7 +74,7 @@ add_executable (Renderer
 "src/Engine/Key/Key.h" 
 "src/Engine/Key/Key.cpp"
 "src/Engine/Debugger/Debugger.h"
-"src/Engine/Debugger/Debugger.cpp")
+"src/Engine/Debugger/Debugger.cpp" "src/Engine/Factory/Factory.h" "src/Engine/Factory/Factory.cpp")
 
 target_link_libraries(Renderer PRIVATE glfw)
 target_link_libraries(Renderer PRIVATE glm::glm)

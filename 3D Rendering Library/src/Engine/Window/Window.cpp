@@ -45,6 +45,11 @@ void Window::changeCamera(Camera &camera)
 	m_camera = &camera;
 }
 
+Camera &Window::getCurrentCamera()
+{
+	return *m_camera;
+}
+
 void Window::draw(Object &object)
 {
 	object.setProjection(getProjection());
