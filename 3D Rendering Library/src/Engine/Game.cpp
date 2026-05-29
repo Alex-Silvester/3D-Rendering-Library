@@ -17,7 +17,9 @@ void Game::run()
 
     m_window->clear();
 
-    render();
+    preRender();
+    defaultRender();
+    postRender();
 
     debug_window.renderFrame();
 
@@ -36,6 +38,9 @@ void Game::windowInit()
   m_window->changeCamera(m_camera);
 	
 	debug_window.init(*m_window);
+  
+  object_factory.addCopyObject(Object(Transform(), default_square, Material(default_shader)));
+  object_factory.addObjectList(m_object_list);
 	
 	addKeys();
 }
@@ -45,16 +50,14 @@ void Game::gameInit()
   default_shader->init("Data/shaders/vertex/default.vert", "Data/shaders/fragment/default.frag");
   default_shader->setProjection(m_window->getProjection());
 
-  test_object.mesh = default_square;
-  test_object.material.shader = default_shader;
+  test_object = &object_factory.create();
 
-  test_object.material.colour.r = 0.f;
+  test_object->material.colour.r = 0.f;
 
-  transparent_object.mesh = default_square;
-  transparent_object.material.shader = default_shader;
+  transparent_object = &object_factory.create();
 
-  transparent_object.material.colour = Colour(1.f, 0.f, 0.f, 0.3f);
-  transparent_object.transform.position = test_object.transform.position + glm::vec3(0, 0, 1);
+  transparent_object->material.colour = Colour(1.f, 0.f, 0.f, 0.3f);
+  transparent_object->transform.position = test_object->transform.position + glm::vec3(0, 0, 1);
 }
 
 void Game::update(float dt)
@@ -62,14 +65,35 @@ void Game::update(float dt)
   debug_window.addText("FPS: %.f", 1.f / dt);
 	debug_window.addText("Camera Pos: [%.4f, %.4f, %.4f]", m_camera.Position.x, m_camera.Position.y, m_camera.Position.z);
 
-  test_object.transform.rotation += dt;
+  test_object->transform.rotation += dt;
 }
 
-//Note: when rendering transparent objects, render them last from back to front to get the transparency to work properly
-void Game::render()
+void Game::preRender()
 {
-  m_window->draw(test_object);
-  m_window->draw(transparent_object);
+
+}
+
+void Game::postRender()
+{
+
+}
+
+void Game::defaultRender()
+{
+  std::sort(m_object_list.begin(), m_object_list.end(),
+            [this](std::unique_ptr<Object> &a, std::unique_ptr<Object> &b)
+  {
+    Camera &cam = m_window->getCurrentCamera();
+    glm::vec3 &pos_a = a->transform.position;
+    glm::vec3 &pos_b = b->transform.position;
+  
+    return glm::distance(cam.Position, pos_a) > glm::distance(cam.Position, pos_b);
+  });
+
+  for (std::unique_ptr<Object> &obj : m_object_list)
+  {
+    m_window->draw(*obj);
+  }
 }
 
 //This could be made more efficient with, maybe, preprocessor stuff
