@@ -5,6 +5,7 @@
 #include "Debugger/Debugger.h"
 #include "Factory/Factory.h"
 #include "Skybox/Skybox.h"
+#include "Timer/Timer.h"
 
 class Game
 {

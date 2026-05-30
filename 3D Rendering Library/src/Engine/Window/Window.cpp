@@ -157,10 +157,15 @@ void Window::mouse_callback(GLFWwindow *window, double xposIn, double yposIn)
 
 void Window::mouseEvent(double xposIn, double yposIn)
 {
-	if (glfwGetInputMode(m_window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL) return;
-
 	float xpos = static_cast<float>(xposIn);
 	float ypos = static_cast<float>(yposIn);
+
+	if (glfwGetInputMode(m_window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL)
+	{
+		last_x = xpos;
+		last_y = ypos;
+		return;
+	}
 
 	if (first_mouse)
 	{
