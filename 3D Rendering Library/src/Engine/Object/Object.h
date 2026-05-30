@@ -21,7 +21,7 @@ private:
 
 	friend class Window;
 
-	void draw(VAO vao, VBO vbo, const glm::mat4 &view, const Window *window);
+	virtual void draw(VAO vao, VBO vbo, const glm::mat4 &view, const Window *window);
 
 public:
 
