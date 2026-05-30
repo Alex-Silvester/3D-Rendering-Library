@@ -42,6 +42,8 @@ void Game::windowInit()
   object_factory.addCopyObject(Object(Transform(), default_square, Material(default_shader)));
   object_factory.addObjectList(m_object_list);
 	
+  skybox.initialiseFaces("Data/images/skybox");
+
 	addKeys();
 }
 
@@ -73,13 +75,10 @@ void Game::preRender()
 
 }
 
-void Game::postRender()
-{
-
-}
-
 void Game::defaultRender()
 {
+  m_window->draw(skybox);
+
   std::sort(m_object_list.begin(), m_object_list.end(),
             [this](std::unique_ptr<Object> &a, std::unique_ptr<Object> &b)
   {
@@ -94,6 +93,11 @@ void Game::defaultRender()
   {
     m_window->draw(*obj);
   }
+}
+
+void Game::postRender()
+{
+
 }
 
 //This could be made more efficient with, maybe, preprocessor stuff

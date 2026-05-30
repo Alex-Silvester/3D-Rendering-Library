@@ -4,6 +4,7 @@
 #include "Window/Window.h"
 #include "Debugger/Debugger.h"
 #include "Factory/Factory.h"
+#include "Skybox/Skybox.h"
 
 class Game
 {
@@ -43,4 +44,6 @@ private:
 	std::vector<std::unique_ptr<Object>> m_object_list;
 
 	Factory<Object> object_factory;
+
+	Skybox skybox;
 };
