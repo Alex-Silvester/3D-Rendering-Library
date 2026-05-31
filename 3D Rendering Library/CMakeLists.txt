@@ -74,7 +74,15 @@ add_executable (Renderer
 "src/Engine/Key/Key.h" 
 "src/Engine/Key/Key.cpp"
 "src/Engine/Debugger/Debugger.h"
-"src/Engine/Debugger/Debugger.cpp" "src/Engine/Factory/Factory.h" "src/Engine/Factory/Factory.cpp" "src/Engine/Utils/Utils.h" "src/Engine/Skybox/Skybox.h" "src/Engine/Skybox/Skybox.cpp" "src/Engine/Utils/Utils.cpp" "src/Engine/Timer/Timer.h" )
+"src/Engine/Debugger/Debugger.cpp"
+"src/Engine/Factory/Factory.h" 
+"src/Engine/Factory/Factory.cpp" 
+"src/Engine/Utils/Utils.h"
+"src/Engine/Skybox/Skybox.h" 
+"src/Engine/Skybox/Skybox.cpp" 
+"src/Engine/Utils/Utils.cpp"
+"src/Engine/Timer/Timer.h" 
+"src/Engine/Model/Model.h")
 
 target_link_libraries(Renderer PRIVATE glfw)
 target_link_libraries(Renderer PRIVATE glm::glm)
@@ -82,6 +90,8 @@ target_link_libraries(Renderer PRIVATE glm::glm)
 target_include_directories(Renderer PRIVATE "glad/include")
 target_include_directories(Renderer PRIVATE "glad/src")
 target_include_directories(Renderer PRIVATE "stb_image")
+target_include_directories(Renderer PRIVATE "assimp-3.1.1/include")
+
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/Data/ DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Data/)
 
