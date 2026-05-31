@@ -12,11 +12,13 @@ public:
 
 	Texture() = default;
 
-	bool setTexture(std::string path);
+	bool setTexture(const std::string &path);
 	void bindTexture();
+
+	int ID();
 
 private:
 
-	TextureID m_texture_ID = 0;
+	TextureID m_texture_ID;
 
 };

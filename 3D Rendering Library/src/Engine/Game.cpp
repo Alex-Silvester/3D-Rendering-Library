@@ -53,13 +53,15 @@ void Game::gameInit()
   default_shader->setProjection(m_window->getProjection());
 
   test_object = &object_factory.create();
-
   test_object->material.colour.r = 0.f;
 
   transparent_object = &object_factory.create();
-
   transparent_object->material.colour = Colour(1.f, 0.f, 0.f, 0.3f);
   transparent_object->transform.position = test_object->transform.position + glm::vec3(0, 0, 1);
+
+  textured_object = &object_factory.create();
+  textured_object->material.setTexture("Data/images/Croose.jpg");
+  textured_object->transform.position += glm::vec3(-2.0f, 0, 0 );
 }
 
 void Game::update(float dt)

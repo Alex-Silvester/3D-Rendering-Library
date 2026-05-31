@@ -9,7 +9,12 @@ out vec4 FragColor;
 
 uniform vec4 colour;
 
+uniform int hasTexture;
+uniform sampler2D Texture;
+
 void main()
 {
-    FragColor = MeshColour * colour;
+    vec4 tex = texture(Texture, TexCoord);
+
+    FragColor = MeshColour * colour * mix(vec4(1.0f), tex, hasTexture);
 }

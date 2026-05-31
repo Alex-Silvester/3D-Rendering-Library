@@ -1,8 +1,7 @@
 #include "Texture.h"
 
-bool Texture::setTexture(std::string path)
+bool Texture::setTexture(const std::string &path)
 {
-  /*
   glGenTextures(1, &m_texture_ID);
   glBindTexture(GL_TEXTURE_2D, m_texture_ID);
 
@@ -16,7 +15,7 @@ bool Texture::setTexture(std::string path)
 
   // load image, create texture and generate mipmaps
   int width, height, nrChannels;
-  stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
+  //stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
 
   unsigned char *data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
   if (data)
@@ -31,13 +30,16 @@ bool Texture::setTexture(std::string path)
   }
   stbi_image_free(data);
 
-  return true;
-  */
-  return false;
+  return true;  
 }
 
 void Texture::bindTexture()
 {
   glActiveTexture(GL_TEXTURE0);
   glBindTexture(GL_TEXTURE_2D, m_texture_ID);
+}
+
+int Texture::ID()
+{
+  return m_texture_ID;
 }
