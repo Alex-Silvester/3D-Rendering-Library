@@ -41,6 +41,7 @@ private:
 	
 	Object* test_object = nullptr;
 	Object* transparent_object = nullptr;
+	Object *textured_object = nullptr;
 
 	std::vector<std::unique_ptr<Object>> m_object_list;
 
