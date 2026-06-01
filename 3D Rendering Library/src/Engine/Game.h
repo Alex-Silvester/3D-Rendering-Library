@@ -7,6 +7,8 @@
 #include "Skybox/Skybox.h"
 #include "Timer/Timer.h"
 
+#include "Model/Model.h"
+
 class Game
 {
 public:
@@ -42,6 +44,8 @@ private:
 	Object* test_object = nullptr;
 	Object* transparent_object = nullptr;
 	Object *textured_object = nullptr;
+
+	Model test_model;
 
 	std::vector<std::unique_ptr<Object>> m_object_list;
 

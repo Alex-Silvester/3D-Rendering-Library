@@ -62,6 +62,8 @@ void Game::gameInit()
   textured_object = &object_factory.create();
   textured_object->material.setTexture("Data/images/Croose.jpg");
   textured_object->transform.position += glm::vec3(-2.0f, 0, 0 );
+
+  test_model.create("Data/Models/FBX/Forklift.fbx");
 }
 
 void Game::update(float dt)
@@ -81,6 +83,7 @@ void Game::defaultRender()
 {
   m_window->draw(skybox);
 
+  
   std::sort(m_object_list.begin(), m_object_list.end(),
             [this](std::unique_ptr<Object> &a, std::unique_ptr<Object> &b)
   {

@@ -36,7 +36,7 @@ public:
 
 	void bindVBO(VBO vbo);
 
-	void renderMesh(int data_points = 12);
+	void renderMesh(size_t data_points = 12);
 
 private:
 
