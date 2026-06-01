@@ -9,13 +9,13 @@ using VBO = unsigned int;
 
 static const std::vector<float> default_square =
 {
-		1.f, 1.f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   0.f, 0.f,
-	 -1.f, 1.f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   1.f, 0.f,
-	 -1.f,-1.f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   1.f, 1.f,
-											 							   		  	
-	 -1.f,-1.f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   1.f, 1.f,
-	  1.f,-1.f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   0.f, 1.f,
-	  1.f, 1.f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   0.f, 0.f,
+		1.f, 1.f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 1.f, 1.f,   0.f, 0.f,
+	 -1.f, 1.f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 1.f, 1.f,   1.f, 0.f,
+	 -1.f,-1.f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 1.f, 1.f,   1.f, 1.f,
+											 							   		  				 
+	 -1.f,-1.f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 1.f, 1.f,   1.f, 1.f,
+	  1.f,-1.f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 1.f, 1.f,   0.f, 1.f,
+	  1.f, 1.f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 1.f, 1.f,   0.f, 0.f,
 };
 
 class Mesh

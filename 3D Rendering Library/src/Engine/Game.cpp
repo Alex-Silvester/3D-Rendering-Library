@@ -63,7 +63,9 @@ void Game::gameInit()
   textured_object->material.setTexture("Data/images/Croose.jpg");
   textured_object->transform.position += glm::vec3(-2.0f, 0, 0 );
 
-  test_model.create("Data/Models/FBX/Forklift.fbx");
+  model_mesh_test = &object_factory.create();
+  model_mesh_test->mesh.setMesh(test_model.create("Data/Models/FBX/Forklift.fbx").getVertices(0.01f));
+  model_mesh_test->transform.position += glm::vec3(-5.f, -5.f, 0.f);
 }
 
 void Game::update(float dt)
@@ -76,7 +78,7 @@ void Game::update(float dt)
 
 void Game::preRender()
 {
-
+  test_model.Draw(*default_shader);
 }
 
 void Game::defaultRender()

@@ -1,6 +1,37 @@
 #include "Model.h"
 
+std::vector<float> Model::getVertices(float scale)
+{
+  std::vector<float> mesh = {};
 
+  for (int i = 0; i < meshes.size(); i++)
+  {
+    mesh.append_range(getVerticesFromMesh(i, scale));
+  }
+
+  return mesh;
+}
+
+std::vector<float> Model::getVerticesFromMesh(int idx, float scale) 
+{
+  const ModelMesh &mesh = meshes[idx];
+
+  const std::vector<Vertex> &verts = mesh.vertices;
+  std::vector<float> drawn_verts = {};
+
+  for(unsigned int index: mesh.indices)
+  {
+    drawn_verts.append_range(std::vector<float>
+    {
+      verts[index].Position.x * scale, verts[index].Position.y * scale, verts[index].Position.z * scale,
+      1.f,1.f,1.f,1.f,
+      verts[index].Normal.x, verts[index].Normal.y, verts[index].Normal.z,
+      verts[index].TexCoords.x, verts[index].TexCoords.y
+    });
+  }
+
+  return drawn_verts;
+}
 
 unsigned int Model::TextureFromFile(const char *path, const string &directory, bool gamma)
 {
@@ -145,18 +176,18 @@ ModelMesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
   // specular: texture_specularN
   // normal: texture_normalN
 
-  // 1. diffuse maps
-  vector<ModelTexture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
-  textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-  // 2. specular maps
-  vector<ModelTexture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
-  textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
-  // 3. normal maps
-  std::vector<ModelTexture> normalMaps = loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
-  textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
-  // 4. height maps
-  std::vector<ModelTexture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
-  textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
+  //// 1. diffuse maps
+  //vector<ModelTexture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
+  //textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
+  //// 2. specular maps
+  //vector<ModelTexture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
+  //textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+  //// 3. normal maps
+  //std::vector<ModelTexture> normalMaps = loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
+  //textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
+  //// 4. height maps
+  //std::vector<ModelTexture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
+  //textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 
   // return a mesh object created from the extracted mesh data
   return ModelMesh(vertices, indices, textures);
