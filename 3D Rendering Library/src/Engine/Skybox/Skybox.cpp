@@ -25,7 +25,7 @@ void Skybox::initialiseFaces(std::string path)
 	mesh = Mesh(skybox_vertices);
 }
 
-void Skybox::draw(VAO vao, VBO vbo, const glm::mat4 &view, const Window *window)
+void Skybox::draw(const glm::mat4 &view, const Window *window)
 {
 	GLint polygonMode;
 	glGetIntegerv(GL_POLYGON_MODE, &polygonMode);

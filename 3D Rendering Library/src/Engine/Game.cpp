@@ -26,9 +26,6 @@ void Game::run()
     m_window->display();
   }
 
-  glDeleteVertexArrays(1, &m_window->m_vao);
-  glDeleteBuffers(1, &m_window->m_vbo);
-
   glfwTerminate();
 }
 

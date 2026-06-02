@@ -12,7 +12,7 @@ void Object::setProjection(const glm::mat4 &projection)
   material.setProjection(projection);
 }
 
-void Object::draw(VAO vao, VBO vbo, const glm::mat4 &view, const Window *window)
+void Object::draw(const glm::mat4 &view, const Window *window)
 {
   mesh.bindVBO();
 

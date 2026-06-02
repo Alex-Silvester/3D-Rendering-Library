@@ -53,7 +53,7 @@ Camera &Window::getCurrentCamera()
 void Window::draw(Object &object)
 {
 	object.setProjection(getProjection());
-	object.draw(m_vao, m_vbo, m_camera->GetViewMatrix(), this);
+	object.draw(m_camera->GetViewMatrix(), this);
 }
 
 bool Window::initialise(float size_x, float size_y, const char *name)
@@ -78,28 +78,6 @@ bool Window::initialise(float size_x, float size_y, const char *name)
 	
 	// Set initial viewport
 	glViewport(0, 0, (int)size_x, (int)size_y);
-
-	glGenVertexArrays(1, &m_vao);
-	glGenBuffers(1, &m_vbo);
-	
-	glBindVertexArray(m_vao);
-	
-	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-	
-	//position(3 floats), colour(4 floats), normal(3 floats), texture coordinate(2 floats)
-	
-	// position attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void *)0);
-	glEnableVertexAttribArray(0);
-	// colour attribute
-	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void *)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);
-	// normal attribute
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void *)(7 * sizeof(float)));
-	glEnableVertexAttribArray(2);
-	// texture attribute
-	glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void *)(10 * sizeof(float)));
-	glEnableVertexAttribArray(3);
 
 	glEnable(GL_BLEND);
 	glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);

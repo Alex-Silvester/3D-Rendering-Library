@@ -56,7 +56,7 @@ public:
 
 private:
 
-  void draw(VAO vao, VBO vbo, const glm::mat4 &view, const Window *window) override;
+  void draw(const glm::mat4 &view, const Window *window) override;
 
 private:
 
