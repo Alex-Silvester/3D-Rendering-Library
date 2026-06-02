@@ -73,7 +73,7 @@ bool Window::initialise(float size_x, float size_y, const char *name)
 
 	glfwSetWindowUserPointer(m_window, reinterpret_cast<void *>(this));
 
-	glDisable(GL_CULL_FACE);
+	glEnable(GL_CULL_FACE);
 	glEnable(GL_DEPTH_TEST);
 	
 	// Set initial viewport
