@@ -60,11 +60,6 @@ private:
 
 	bool processInput();
 
-public:
-
-	VAO m_vao = 0;
-	VBO m_vbo = 0;
-
 private:
 
 	GLFWwindow *m_window = nullptr;

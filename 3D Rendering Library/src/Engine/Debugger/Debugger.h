@@ -23,6 +23,12 @@ public:
 		ImGui::Text(format, args...);
 	}
 
+	template<typename... Args>
+	inline void addText(const char *format, glm::vec3 vector, Args... args)
+	{
+		ImGui::Text(format, vector.x, vector.y, vector.z, args...);
+	}
+
 
 private:
 

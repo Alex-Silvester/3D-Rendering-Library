@@ -22,8 +22,14 @@ class Mesh
 {
 public:
 
-	Mesh() = default;
-	Mesh(const std::vector<float> &verts);
+	Mesh();
+
+	Mesh(const std::vector<float> &mesh);
+
+	void operator=(const Mesh &mesh)
+	{
+		setMesh(mesh.m_vertices);
+	}
 
 	void operator=(const std::vector<float> &verts)
 	{
@@ -34,7 +40,8 @@ public:
 
 	void setMesh_move(const std::vector<float> &verts);
 
-	void bindVBO(VBO vbo);
+	void bindVBO();
+	void bindVAO();
 
 	void renderMesh(size_t data_points = 12);
 
@@ -42,4 +49,6 @@ private:
 
 	std::vector<float> m_vertices = std::vector<float>();
 
+
+	unsigned int m_vbo = 0, m_vao = 0;;
 };
