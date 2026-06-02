@@ -283,8 +283,8 @@ const glm::mat4& Window::getProjection()
 	m_projection = glm::perspective(
 		glm::radians(m_camera->Zoom),
 		(float)size_x / (float)size_y,
-		0.1f,
-		100.0f);
+		m_near,
+		m_far);
 	
 	return m_projection;
 }

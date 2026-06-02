@@ -16,5 +16,7 @@ void main()
 {
     vec4 tex = texture(Texture, TexCoord);
 
-    FragColor = MeshColour * colour * mix(vec4(1.0f), tex, hasTexture);
+    float light = dot(normalize(Normal), normalize(vec3(0.0f,1.0f,1.0f)));
+
+    FragColor = MeshColour * colour * mix(vec4(1.0f), tex, hasTexture) * vec4(vec3(light),1.0f);
 }

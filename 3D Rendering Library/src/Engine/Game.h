@@ -7,6 +7,8 @@
 #include "Skybox/Skybox.h"
 #include "Timer/Timer.h"
 
+#include "Model/Model.h"
+
 class Game
 {
 public:
@@ -39,9 +41,12 @@ private:
 	
 	std::shared_ptr<Shader> default_shader = std::make_shared<Shader>();
 	
-	Object* test_object = nullptr;
-	Object* transparent_object = nullptr;
+	Object *test_object = nullptr;
+	Object *transparent_object = nullptr;
 	Object *textured_object = nullptr;
+	Object *model_mesh_test = nullptr;
+
+	Model test_model;
 
 	std::vector<std::unique_ptr<Object>> m_object_list;
 

@@ -42,6 +42,10 @@ public:
 
 	const glm::mat4& getProjection();
 
+	float &nearPlane() { return m_near; }
+
+	float &farPlane() { return m_far; }
+
 private:
 
 	GLFWwindow *createWindow(float size_x = SCREEN_WIDTH, float size_y = SCREEN_HEIGHT, const char *name = "");
@@ -71,6 +75,7 @@ private:
 	
 	glm::mat4 m_projection = glm::mat4(1.0f);  // Cache the projection matrix
 
+	float m_near = 0.1f, m_far = 100.f;
 
 	bool first_mouse = true;
 	float last_x, last_y;

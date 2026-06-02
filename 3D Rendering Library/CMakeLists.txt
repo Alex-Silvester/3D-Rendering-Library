@@ -26,6 +26,16 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(GLM)
 
+
+
+FetchContent_Declare(
+	ASSIMP
+	GIT_REPOSITORY https://github.com/assimp/assimp.git
+	GIT_TAG 392a658f9c271be965271f45e7521a1b80ea4392
+)
+FetchContent_MakeAvailable(ASSIMP)
+
+
 # Add source to this project's executable.
 add_executable (Renderer 
 "main.cpp"  
@@ -74,14 +84,24 @@ add_executable (Renderer
 "src/Engine/Key/Key.h" 
 "src/Engine/Key/Key.cpp"
 "src/Engine/Debugger/Debugger.h"
-"src/Engine/Debugger/Debugger.cpp" "src/Engine/Factory/Factory.h" "src/Engine/Factory/Factory.cpp" "src/Engine/Utils/Utils.h" "src/Engine/Skybox/Skybox.h" "src/Engine/Skybox/Skybox.cpp" "src/Engine/Utils/Utils.cpp" "src/Engine/Timer/Timer.h" )
+"src/Engine/Debugger/Debugger.cpp"
+"src/Engine/Factory/Factory.h" 
+"src/Engine/Factory/Factory.cpp" 
+"src/Engine/Utils/Utils.h"
+"src/Engine/Skybox/Skybox.h" 
+"src/Engine/Skybox/Skybox.cpp" 
+"src/Engine/Utils/Utils.cpp"
+"src/Engine/Timer/Timer.h" 
+"src/Engine/Model/Model.h" "src/Engine/Model/Model.cpp")
 
 target_link_libraries(Renderer PRIVATE glfw)
 target_link_libraries(Renderer PRIVATE glm::glm)
+target_link_libraries(Renderer PRIVATE assimp::assimp)
 
 target_include_directories(Renderer PRIVATE "glad/include")
 target_include_directories(Renderer PRIVATE "glad/src")
 target_include_directories(Renderer PRIVATE "stb_image")
+
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/Data/ DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Data/)
 

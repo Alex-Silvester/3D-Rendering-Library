@@ -9,13 +9,13 @@ using VBO = unsigned int;
 
 static const std::vector<float> default_square =
 {
-		1.f, 1.f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   0.f, 0.f,
-	 -1.f, 1.f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   1.f, 0.f,
-	 -1.f,-1.f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   1.f, 1.f,
-											 							   		  	
-	 -1.f,-1.f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   1.f, 1.f,
-	  1.f,-1.f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   0.f, 1.f,
-	  1.f, 1.f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 0.f, 0.f,   0.f, 0.f,
+		1.f, 1.f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 1.f, 1.f,   0.f, 0.f,
+	 -1.f, 1.f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 1.f, 1.f,   1.f, 0.f,
+	 -1.f,-1.f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 1.f, 1.f,   1.f, 1.f,
+											 							   		  				 
+	 -1.f,-1.f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 1.f, 1.f,   1.f, 1.f,
+	  1.f,-1.f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 1.f, 1.f,   0.f, 1.f,
+	  1.f, 1.f, 0.f,   1.f, 1.f, 1.f, 1.f,   0.f, 1.f, 1.f,   0.f, 0.f,
 };
 
 class Mesh
@@ -36,7 +36,7 @@ public:
 
 	void bindVBO(VBO vbo);
 
-	void renderMesh(int data_points = 12);
+	void renderMesh(size_t data_points = 12);
 
 private:
 
