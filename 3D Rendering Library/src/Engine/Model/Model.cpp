@@ -1,18 +1,25 @@
 #include "Model.h"
 
-std::vector<float> Model::getVertices(float scale)
+std::vector<float> Model::getVertices(int mesh_specifier)
 {
   std::vector<float> mesh = {};
 
-  for (int i = 0; i < meshes.size(); i++)
+  if(mesh_specifier == -1)
   {
-    mesh.append_range(getVerticesFromMesh(i, scale));
+    for (int i = 0; i < meshes.size(); i++)
+    {
+      mesh.append_range(getVerticesFromMesh(i));
+    }
+  }
+  else
+  {
+    mesh.append_range(getVerticesFromMesh(mesh_specifier));
   }
 
   return mesh;
 }
 
-std::vector<float> Model::getVerticesFromMesh(int idx, float scale) 
+std::vector<float> Model::getVerticesFromMesh(int idx) 
 {
   const ModelMesh &mesh = meshes[idx];
 
@@ -23,11 +30,11 @@ std::vector<float> Model::getVerticesFromMesh(int idx, float scale)
   {
     drawn_verts.append_range(std::vector<float>
     {
-      verts[index].Position.x * scale, verts[index].Position.y * scale, verts[index].Position.z * scale,
+      verts[index].Position.x, verts[index].Position.y, verts[index].Position.z,
       1.f,1.f,1.f,1.f,
       verts[index].Normal.x, verts[index].Normal.y, verts[index].Normal.z,
       verts[index].TexCoords.x, verts[index].TexCoords.y
-    });
+    }); 
   }
 
   return drawn_verts;
@@ -75,7 +82,8 @@ unsigned int Model::TextureFromFile(const char *path, const string &directory, b
 
 void Model::loadModel(string const &path)
 {
-    // read file via ASSIMP
+
+  // read file via ASSIMP
   Assimp::Importer importer;
   const aiScene *scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
   // check for errors

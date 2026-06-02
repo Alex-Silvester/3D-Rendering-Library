@@ -10,6 +10,15 @@ public:
 
 	void transformModel(glm::mat4 &model);
 
+	Transform &Move(const glm::vec3 &move);
+	Transform &Move(float x, float y, float z) { return Move({ x, y, z }); }
+
+	Transform &Scale(const glm::vec3 &size);
+	Transform &Scale(float x, float y, float z) { return Scale({ x, y, z }); }
+
+	Transform &Rotate(const glm::vec3 &angle);
+	Transform &Rotate(float x, float y, float z) { return Rotate({ x, y, z }); }
+
 public:
 
 	glm::vec3 position = glm::vec3();

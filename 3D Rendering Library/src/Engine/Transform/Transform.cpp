@@ -14,3 +14,21 @@ void Transform::transformModel(glm::mat4 &model)
 	model = glm::scale(model, scale);
 
 }
+
+Transform &Transform::Move(const glm::vec3 &move)
+{
+	position += move;
+	return *this;
+}
+
+Transform &Transform::Scale(const glm::vec3 &size)
+{
+	scale *= size;
+	return *this;
+}
+
+Transform &Transform::Rotate(const glm::vec3 &angle)
+{
+	rotation += angle;
+	return *this;
+}

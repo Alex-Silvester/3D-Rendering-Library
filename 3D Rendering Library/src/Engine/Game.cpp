@@ -64,8 +64,8 @@ void Game::gameInit()
   textured_object->transform.position += glm::vec3(-2.0f, 0, 0 );
 
   model_mesh_test = &object_factory.create();
-  model_mesh_test->mesh.setMesh(test_model.create("Data/Models/FBX/Forklift.fbx").getVertices(0.01f));
-  model_mesh_test->transform.position += glm::vec3(-5.f, -5.f, 0.f);
+  model_mesh_test->mesh.setMesh(test_model.create("Data/Models/FBX/Forklift.fbx").getVertices());
+  model_mesh_test->transform.Move(-5.f, -5.f, 0.f).Scale(0.01f,0.01f,0.01f);
 }
 
 void Game::update(float dt)
@@ -78,7 +78,7 @@ void Game::update(float dt)
 
 void Game::preRender()
 {
-  test_model.Draw(*default_shader);
+
 }
 
 void Game::defaultRender()
