@@ -92,7 +92,7 @@ add_executable (Renderer
 "src/Engine/Skybox/Skybox.cpp" 
 "src/Engine/Utils/Utils.cpp"
 "src/Engine/Timer/Timer.h" 
-"src/Engine/Model/Model.h" "src/Engine/Model/Model.cpp")
+"src/Engine/Model/Model.h" "src/Engine/Model/Model.cpp" "src/Engine/Light/Light.h")
 
 target_link_libraries(Renderer PRIVATE glfw)
 target_link_libraries(Renderer PRIVATE glm::glm)

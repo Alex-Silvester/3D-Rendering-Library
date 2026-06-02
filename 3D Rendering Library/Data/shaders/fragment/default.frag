@@ -12,11 +12,14 @@ uniform vec4 colour;
 uniform int hasTexture;
 uniform sampler2D Texture;
 
+uniform vec3 lightPos;
+uniform float lightIntensity;
+
 void main()
 {
     vec4 tex = texture(Texture, TexCoord);
 
-    float light = dot(normalize(Normal), normalize(vec3(0.0f,1.0f,1.0f)));
+    float light = dot(normalize(Normal), normalize(lightPos-FragPos))*lightIntensity;
 
     FragColor = MeshColour * colour * mix(vec4(1.0f), tex, hasTexture) * vec4(vec3(light),1.0f);
 }

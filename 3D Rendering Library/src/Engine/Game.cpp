@@ -65,8 +65,6 @@ void Game::gameInit()
  std::vector<float> mesh = test_model.create("Data/Models/FBX/Forklift.fbx").getVertices();
  model_mesh_test->mesh.setMesh(mesh);
  model_mesh_test->transform.Move(-5.f, -5.f, 0.f).Scale(0.01f, 0.01f, 0.01f);
-
-  //test_object->mesh.setMesh(mesh);
 }
 
 void Game::update(float dt)
@@ -75,6 +73,11 @@ void Game::update(float dt)
 	debug_window.addText("Camera Pos: [%.4f, %.4f, %.4f]", m_camera.Position);
 
   test_object->transform.rotation += dt;
+
+  light->position = m_window->getCurrentCamera().Position;
+
+  default_shader->setVec3("lightPos", light->position);
+  default_shader->setFloat("lightIntensity", light->intensity);
 }
 
 void Game::preRender()

@@ -5,6 +5,7 @@
 #include "../Transform/Transform.h"
 #include "../Mesh/Mesh.h"
 #include "../Material/Material.h"
+#include "../Light/Light.h"
 
 class Window;
 
@@ -28,6 +29,8 @@ public:
 	Transform transform = Transform();
 	Mesh mesh = Mesh();
 	Material material = Material();
+
+	//std::shared_ptr<Light> light_ptr = std::make_shared<Light>();
 
 	bool active = true;
 };
