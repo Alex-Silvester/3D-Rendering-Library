@@ -14,16 +14,19 @@ void Object::setProjection(const glm::mat4 &projection)
 
 void Object::draw(VAO vao, VBO vbo, const glm::mat4 &view, const Window *window)
 {
-  mesh.bindVBO(vbo);
+  mesh.bindVBO();
 
   material.use(transform);
   material.setViewMatrix(view);
 
-  glBindVertexArray(vao);
+  mesh.bindVAO();
 
   glm::mat4 model = glm::mat4(1.0f);
   transform.transformModel(model);
   material.setModelTransform(model);
 
   mesh.renderMesh();
+
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
+  glBindVertexArray(0);
 }

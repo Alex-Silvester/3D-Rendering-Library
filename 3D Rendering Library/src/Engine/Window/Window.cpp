@@ -213,6 +213,21 @@ bool Window::processInput()
 		}
 	}
 
+	if (Key<GLFW_KEY_F5>::pressed())
+	{
+		GLint polygonMode;
+		glGetIntegerv(GL_POLYGON_MODE, &polygonMode);
+
+		if (polygonMode == GL_FILL)
+		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		}
+		else if (polygonMode == GL_LINE)
+		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		}
+	}
+
 	if (glfwGetInputMode(m_window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL) return true;
 
 	if (m_camera == nullptr)
