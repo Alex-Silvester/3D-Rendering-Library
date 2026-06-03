@@ -26,12 +26,22 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(GLM)
 
+
+
+FetchContent_Declare(
+	ASSIMP
+	GIT_REPOSITORY https://github.com/assimp/assimp.git
+	GIT_TAG 392a658f9c271be965271f45e7521a1b80ea4392
+)
+FetchContent_MakeAvailable(ASSIMP)
+
+
 # Add source to this project's executable.
 add_executable (Renderer 
 "main.cpp"  
 "glad/include/glad/glad.h"
 "glad/include/KHR/khrplatform.h" 
-"glad/src/glad.cpp" 
+"glad/src/glad.c" 
 "imgui-1.92.5/imconfig.h"
 "imgui-1.92.5/imgui.cpp" 
 "imgui-1.92.5/imgui.h"
@@ -55,17 +65,48 @@ add_executable (Renderer
 "src/Engine/Game.h"
 "src/Dependencies.h" 
 "src/Engine/Game.cpp"
-"src/Engine/Window.h" 
-"src/Engine/Window.cpp")
+"src/Engine/Window/Window.h" 
+"src/Engine/Window/Window.cpp" 
+"src/Engine/Material/Material.h"
+"src/Engine/Material/Material.cpp"
+"src/Engine/Material/Shader.h" 
+"src/Engine/Material/Texture.h" 
+"src/Engine/Material/Texture.cpp"
+"stb_image/stb_image.h" 
+"src/Engine/Transform/Transform.h" 
+"src/Engine/Transform/Transform.cpp"
+"src/Engine/Mesh/Mesh.h"
+"src/Engine/Mesh/Mesh.cpp" 
+"src/Engine/Object/Object.h"
+"src/Engine/Object/Object.cpp" 
+"src/Engine/Camera/Camera.h"
+"src/Engine/Camera/Camera.cpp"
+"src/Engine/Key/Key.h" 
+"src/Engine/Key/Key.cpp"
+"src/Engine/Debugger/Debugger.h"
+"src/Engine/Debugger/Debugger.cpp"
+"src/Engine/Factory/Factory.h" 
+"src/Engine/Factory/Factory.cpp" 
+"src/Engine/Utils/Utils.h"
+"src/Engine/Skybox/Skybox.h" 
+"src/Engine/Skybox/Skybox.cpp" 
+"src/Engine/Utils/Utils.cpp"
+"src/Engine/Timer/Timer.h" 
+"src/Engine/Model/Model.h" "src/Engine/Model/Model.cpp" "src/Engine/Light/Light.h")
 
 target_link_libraries(Renderer PRIVATE glfw)
 target_link_libraries(Renderer PRIVATE glm::glm)
+target_link_libraries(Renderer PRIVATE assimp::assimp)
 
 target_include_directories(Renderer PRIVATE "glad/include")
 target_include_directories(Renderer PRIVATE "glad/src")
+target_include_directories(Renderer PRIVATE "stb_image")
+
+
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/Data/ DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Data/)
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET Renderer PROPERTY CXX_STANDARD 20)
+  set_property(TARGET Renderer PROPERTY CXX_STANDARD 23)
 endif()
 
 # TODO: Add tests and install targets if needed.
