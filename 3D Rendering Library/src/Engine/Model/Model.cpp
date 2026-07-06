@@ -80,9 +80,8 @@ unsigned int Model::TextureFromFile(const char *path, const string &directory, b
   return textureID;
 }
 
-void Model::loadModel(string const &path)
+void Model::loadModel(const string &path)
 {
-
   // read file via ASSIMP
   Assimp::Importer importer;
   const aiScene *scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
@@ -92,14 +91,12 @@ void Model::loadModel(string const &path)
     cout << "ERROR::ASSIMP:: " << importer.GetErrorString() << endl;
     return;
   }
-  // retrieve the directory path of the filepath
-  directory = path.substr(0, path.find_last_of('/'));
-
+  
   // process ASSIMP's root node recursively
   processNode(scene->mRootNode, scene);
 }
 
-void Model::processNode(aiNode *node, const aiScene *scene)
+constexpr void Model::processNode(aiNode *node, const aiScene *scene)
 {
     // process each mesh located at the current node
   for (unsigned int i = 0; i < node->mNumMeshes; i++)
@@ -117,7 +114,7 @@ void Model::processNode(aiNode *node, const aiScene *scene)
 
 }
 
-ModelMesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
+constexpr ModelMesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 {
     // data to fill
   vector<Vertex> vertices;
