@@ -62,7 +62,7 @@ void Game::gameInit()
   textured_object->transform.position += glm::vec3(-2.0f, 0, 0 );
 
  model_mesh_test = &object_factory.create();
- std::vector<float> mesh = test_model.create("Data/Models/FBX/Forklift.fbx").getVertices();
+ const std::vector<float> mesh = test_model.create("Data/Models/FBX/Forklift.fbx").getVertices();
  model_mesh_test->mesh.setMesh(mesh);
  model_mesh_test->transform.Move(-5.f, -5.f, 0.f).Scale(0.01f, 0.01f, 0.01f);
 }
