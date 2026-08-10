@@ -21,7 +21,7 @@ std::vector<float> Model::getVertices(int mesh_specifier)
 
 std::vector<float> Model::getVerticesFromMesh(int idx) 
 {
-  const ModelMesh &mesh = meshes[idx];
+  const ModelMesh &mesh = *static_cast<ModelMesh*>(meshes[idx].get());
 
   const std::vector<Vertex> &verts = mesh.vertices;
   std::vector<float> drawn_verts = {};
@@ -114,7 +114,7 @@ void Model::processNode(aiNode *node, const aiScene *scene)
 
 }
 
-ModelMesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
+std::shared_ptr<Mesh> Model::processMesh(aiMesh *mesh, const aiScene *scene)
 {
     // data to fill
   vector<Vertex> vertices;
@@ -195,7 +195,7 @@ ModelMesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
   //textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 
   // return a mesh object created from the extracted mesh data
-  return ModelMesh(vertices, indices, textures);
+  return std::make_shared<Mesh>(ModelMesh(vertices, indices, textures));
 }
 
 vector<ModelTexture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureType type, string typeName)

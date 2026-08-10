@@ -37,7 +37,6 @@ public:
 	}
 
 	void setMesh(const std::vector<float> &verts);
-
 	void setMesh_move(const std::vector<float> &verts);
 
 	void bindVBO();
