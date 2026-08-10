@@ -64,6 +64,7 @@ void Game::gameInit()
   std::vector<std::shared_ptr<Mesh>> meshes = test_model.create("Data/Models/FBX/Forklift.fbx").meshes;
   model_mesh_test->meshes = meshes;
   model_mesh_test->transform.Move(-5.f, -5.f, 0.f).Scale(0.01f, 0.01f, 0.01f);
+  model_mesh_test->m_draw_mode = DrawMode::EDGE;
 }
 
 void Game::update(float dt)

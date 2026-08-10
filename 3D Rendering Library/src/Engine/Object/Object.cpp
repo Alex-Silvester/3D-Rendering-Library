@@ -28,18 +28,38 @@ void Object::draw(const glm::mat4 &view, const Window *window)
 {
   for(auto& mesh : meshes)
   {
-    mesh->bindVBO();
+    if(m_draw_mode == DrawMode::VERTEX)
+    {
+      mesh->bindVBO();
 
-    material.use(transform);
-    material.setViewMatrix(view);
+      material.use(transform);
+      material.setViewMatrix(view);
 
-    mesh->bindVAO();
+      mesh->bindVAO();
 
-    glm::mat4 model = glm::mat4(1.0f);
-    transform.transformModel(model);
-    material.setModelTransform(model);
+      glm::mat4 model = glm::mat4(1.0f);
+      transform.transformModel(model);
+      material.setModelTransform(model);
 
-    mesh->renderMesh();
+      mesh->renderMesh();
+    }
+    else if (m_draw_mode == DrawMode::EDGE)
+    {
+      ModelMesh &model_mesh = *std::dynamic_pointer_cast<ModelMesh>(mesh);
+
+      model_mesh.bindVBO();
+
+      material.use(transform);
+      material.setViewMatrix(view);
+
+      model_mesh.bindVAO();
+
+      glm::mat4 model = glm::mat4(1.0f);
+      transform.transformModel(model);
+      material.setModelTransform(model);
+
+      model_mesh.renderMesh();
+    }
   }
 
   glBindBuffer(GL_ARRAY_BUFFER, 0);

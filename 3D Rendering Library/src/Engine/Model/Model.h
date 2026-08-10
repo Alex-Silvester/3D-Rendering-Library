@@ -78,7 +78,7 @@ private:
   // initializes all the buffer objects/arrays
   void setupModelMesh()
   {
-      // create buffers/arrays
+    // create buffers/arrays
     glGenVertexArrays(1, &m_vao);
     glGenBuffers(1, &m_vbo);
     glGenBuffers(1, &m_ebo);
