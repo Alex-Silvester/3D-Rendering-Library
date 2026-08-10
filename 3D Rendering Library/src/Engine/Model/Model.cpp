@@ -96,7 +96,7 @@ void Model::loadModel(const string &path)
   processNode(scene->mRootNode, scene);
 }
 
-constexpr void Model::processNode(aiNode *node, const aiScene *scene)
+void Model::processNode(aiNode *node, const aiScene *scene)
 {
     // process each mesh located at the current node
   for (unsigned int i = 0; i < node->mNumMeshes; i++)
@@ -114,7 +114,7 @@ constexpr void Model::processNode(aiNode *node, const aiScene *scene)
 
 }
 
-constexpr ModelMesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
+ModelMesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 {
     // data to fill
   vector<Vertex> vertices;
@@ -229,3 +229,7 @@ vector<ModelTexture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureType 
   return textures;
 }
 
+void ModelMesh::renderMesh(size_t data_points)
+{
+  glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(indices.size()), GL_UNSIGNED_INT, 0);
+}

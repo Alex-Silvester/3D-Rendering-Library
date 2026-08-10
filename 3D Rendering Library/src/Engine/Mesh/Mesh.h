@@ -43,12 +43,12 @@ public:
 	void bindVBO();
 	void bindVAO();
 
-	void renderMesh(size_t data_points = 12);
+	virtual void renderMesh(size_t data_points = 12);
 
 private:
 
 	std::vector<float> m_vertices = std::vector<float>();
 
-
-	unsigned int m_vbo = 0, m_vao = 0;;
+protected:
+	unsigned int m_vbo = 0, m_vao = 0;
 };

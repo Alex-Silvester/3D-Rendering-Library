@@ -22,7 +22,7 @@ void Skybox::initialiseFaces(std::string path)
 
 	transform = Transform();
 	material = Material(m_skybox_shader);
-	mesh = Mesh(skybox_vertices);
+	meshes.push_back(std::make_shared<Mesh>(Mesh(skybox_vertices)));
 }
 
 void Skybox::draw(const glm::mat4 &view, const Window *window)
@@ -34,19 +34,22 @@ void Skybox::draw(const glm::mat4 &view, const Window *window)
 
 	glDepthMask(GL_FALSE);
 
-	mesh.bindVBO();
+	for(auto& mesh : meshes)
+	{
+		mesh->bindVBO();
 
-	material.use(transform);
-	m_skybox_shader->setInt("skybox", 0);
-	material.setViewMatrix(glm::mat4(glm::mat3(view)));
+		material.use(transform);
+		m_skybox_shader->setInt("skybox", 0);
+		material.setViewMatrix(glm::mat4(glm::mat3(view)));
 
-	mesh.bindVAO();
+		mesh->bindVAO();
 
-	glm::mat4 model = glm::mat4(1.0f);
-	transform.transformModel(model);
-	material.setModelTransform(model);
+		glm::mat4 model = glm::mat4(1.0f);
+		transform.transformModel(model);
+		material.setModelTransform(model);
 
-	mesh.renderMesh();
+		mesh->renderMesh();
+	}
 
 	glDepthMask(GL_TRUE);
 

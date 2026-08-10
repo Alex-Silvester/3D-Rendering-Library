@@ -14,7 +14,8 @@ class Object
 public:
 
 	Object() = default;
-	Object(const Transform &transform, const Mesh &mesh, const Material &material);
+	Object(const Transform &transform, const Mesh &new_mesh, const Material &material);
+	Object(const Transform &transform, const std::vector<std::shared_ptr<Mesh>> &new_meshes, const Material &material);
 
 	void setProjection(const glm::mat4 &projection);
 
@@ -27,7 +28,7 @@ private:
 public:
 
 	Transform transform = Transform();
-	Mesh mesh = Mesh();
+	std::vector<std::shared_ptr<Mesh>> meshes = std::vector<std::shared_ptr<Mesh>>();
 	Material material = Material();
 
 	//std::shared_ptr<Light> light_ptr = std::make_shared<Light>();

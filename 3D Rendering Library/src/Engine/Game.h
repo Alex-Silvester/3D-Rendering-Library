@@ -44,11 +44,11 @@ private:
 	Object *test_object = nullptr;
 	Object *transparent_object = nullptr;
 	Object *textured_object = nullptr;
-	Object *model_mesh_test = nullptr;
+	//Object *model_mesh_test = nullptr;
 
 	std::shared_ptr<Light> light = std::make_shared<Light>();
 
-	Model test_model;
+	//Model test_model;
 
 	std::vector<std::unique_ptr<Object>> m_object_list;
 

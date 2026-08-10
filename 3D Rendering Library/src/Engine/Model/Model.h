@@ -12,6 +12,7 @@
 #include <stb_image.h>
 
 #include "../Material/Shader.h"
+#include "../Mesh/Mesh.h"
 
 #include <string>
 #include <fstream>
@@ -49,17 +50,16 @@ struct ModelTexture
   string path;
 };
 
-class ModelMesh
+class ModelMesh : public Mesh
 {
 public:
     // ModelMesh Data
   vector<Vertex>       vertices;
   vector<unsigned int> indices;
   vector<ModelTexture> ModelTextures;
-  unsigned int VAO;
 
   // constructor
-  constexpr ModelMesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<ModelTexture> ModelTextures)
+  ModelMesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<ModelTexture> ModelTextures)
   {
     this->vertices = vertices;
     this->indices = indices;
@@ -69,27 +69,29 @@ public:
     setupModelMesh();
   }
 
+  void renderMesh(size_t data_points = 12) override;
+
 private:
     // render data 
-  unsigned int VBO, EBO;
+  unsigned int m_ebo = 0;
 
   // initializes all the buffer objects/arrays
-  constexpr void setupModelMesh()
+  void setupModelMesh()
   {
       // create buffers/arrays
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
-    glGenBuffers(1, &EBO);
+    glGenVertexArrays(1, &m_vao);
+    glGenBuffers(1, &m_vbo);
+    glGenBuffers(1, &m_ebo);
 
-    glBindVertexArray(VAO);
+    glBindVertexArray(m_vao);
     // load data into vertex buffers
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
     // A great thing about structs is that their memory layout is sequential for all its items.
     // The effect is that we can simply pass a pointer to the struct and it translates perfectly to a glm::vec3/2 array which
     // again translates to 3/2 floats which translates to a byte array.
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), &vertices[0], GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ebo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);
 
     // set the vertex attribute pointers
@@ -160,9 +162,9 @@ private:
   void loadModel(const string &path);
 
   // processes a node in a recursive fashion. Processes each individual mesh located at the node and repeats this process on its children nodes (if any).
-  constexpr void processNode(aiNode *node, const aiScene *scene);
+  void processNode(aiNode *node, const aiScene *scene);
 
-  constexpr ModelMesh processMesh(aiMesh *mesh, const aiScene *scene);
+  ModelMesh processMesh(aiMesh *mesh, const aiScene *scene);
 
   // checks all material textures of a given type and loads the textures if they're not loaded yet.
   // the required info is returned as a Texture struct.
