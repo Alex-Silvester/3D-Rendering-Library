@@ -11,4 +11,11 @@ private:
 	void preRender()     override;
 	void postRender()    override;
 
+	void addKeys() override;
+
+private:
+
+	ObjectFactory m_sprite_factory;
+
+	Object *test_sprite = nullptr;
 };

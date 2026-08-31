@@ -66,7 +66,13 @@ public:
 
   void move(glm::vec3 step);
 
+  void toggleMovement(bool movement) { this->movement = movement;  };
+  bool canMove() { return movement; }
+
 private:
   // calculates the front vector from the Camera's (updated) Euler Angles
   void updateCameraVectors();
+
+private:
+    bool movement = true;
 };

@@ -34,10 +34,9 @@ void Game::windowInit()
 	m_window->initialise();
   m_window->changeCamera(m_camera);
 	
-	debug_window.init(*m_window);
-  
-  
+	debug_window.init(*m_window); 
 
+  addKeysDefault();
 	addKeys();
 }
 
@@ -62,14 +61,12 @@ void Game::defaultRender()
 //This could be made more efficient with, maybe, preprocessor stuff
 void Game::addKeys()
 {
-		Key<GLFW_KEY_ESCAPE      >::addWindow(m_window);
-		Key<GLFW_KEY_W					 >::addWindow(m_window);
-		Key<GLFW_KEY_S					 >::addWindow(m_window);
-		Key<GLFW_KEY_A					 >::addWindow(m_window);
-		Key<GLFW_KEY_D					 >::addWindow(m_window);
-		Key<GLFW_KEY_SPACE			 >::addWindow(m_window);
-		Key<GLFW_KEY_LEFT_SHIFT	 >::addWindow(m_window);
-		Key<GLFW_KEY_LEFT_CONTROL>::addWindow(m_window);
-    Key<GLFW_KEY_TAB         >::addWindow(m_window);
-    Key<GLFW_KEY_F5          >::addWindow(m_window);
+
+}
+
+void Game::addKeysDefault()
+{
+  Key<GLFW_KEY_ESCAPE      >::addWindow(m_window);
+  Key<GLFW_KEY_TAB         >::addWindow(m_window);
+  Key<GLFW_KEY_F5          >::addWindow(m_window);
 }

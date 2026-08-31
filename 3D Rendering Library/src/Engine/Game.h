@@ -9,6 +9,8 @@
 
 #include "Model/Model.h"
 
+using ObjectFactory = Factory<Object>;
+
 class Game
 {
 public:
@@ -29,7 +31,8 @@ private:
 	//renders objects created using default factories
 	void defaultRender();
 
-	void addKeys();
+	virtual void addKeys();
+	void addKeysDefault();
 
 protected:
 
@@ -37,7 +40,6 @@ protected:
 
 	std::shared_ptr<Shader> default_shader = std::make_shared<Shader>();
 
-	
 
 	std::vector<std::unique_ptr<Object>> m_object_list;
 	

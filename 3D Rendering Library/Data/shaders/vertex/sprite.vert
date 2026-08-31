@@ -1,5 +1,4 @@
 #version 330 core
-
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec4 aColour;
 layout (location = 2) in vec3 aNormal;
@@ -15,14 +14,28 @@ uniform mat4 view;
 uniform mat4 projection;
 uniform vec3 position;
 
-
 void main()
 {
-    vec4 worldPos = model * vec4(aPos, 1.0);
+	mat4 model_view = view * model;
+	
+	model_view[0][0] = 1;
+	model_view[0][1] = 0;
+	model_view[0][2] = 0;
+	
+	model_view[1][0] = 0;
+	model_view[1][1] = 1; 
+	model_view[1][2] = 0;
+	
+	model_view[2][0] = 0;
+	model_view[2][1] = 0;
+	model_view[2][2] = 1;
+	
+	gl_Position = projection * (model_view * vec4(aPos, 1.0) + model * view * vec4(2*position,1.0));
+	
+
+	vec4 worldPos = model * vec4(aPos, 1.0);
     FragPos = vec3(worldPos);
     MeshColour = aColour;
-    Normal = aNormal;  
+    Normal = vec3(0,0,1);  
     TexCoord = aTexCoord;
-	
-    gl_Position = projection * view * worldPos;
 }

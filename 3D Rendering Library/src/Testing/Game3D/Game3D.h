@@ -24,5 +24,5 @@ private:
 
 	Skybox skybox;
 
-	Factory<Object> object_factory;
+	ObjectFactory object_factory;
 };

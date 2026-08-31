@@ -206,7 +206,7 @@ bool Window::processInput()
 		}
 	}
 
-	if (glfwGetInputMode(m_window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL) return true;
+	if (glfwGetInputMode(m_window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL || !m_camera->canMove()) return true;
 
 	if (m_camera == nullptr)
 	{
