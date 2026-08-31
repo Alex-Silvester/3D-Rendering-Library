@@ -1,14 +1,15 @@
 ﻿
 #include <iostream>
 
-#include "src/Engine/Game.h"
+#include "src/Testing/Game3D.h"
 
 int main()
 {
+	Game* game = new Game3D();
 
-	Game game = Game();
+	game->run();
 
-	game.run();
+	delete game;
 
 	return 0;
 }

@@ -19,40 +19,29 @@ private:
 
 	void windowInit();
 
-	virtual void gameInit();
-	virtual void update(float dt);
+	virtual void gameInit() {};
+	virtual void update(float dt) {};
 	//render before the default rendering loop
-	virtual void preRender();
+	virtual void preRender() {};
 	//rener after the default rendering loop
-	virtual void postRender();
+	virtual void postRender() {};
 
 	//renders objects created using default factories
 	void defaultRender();
 
 	void addKeys();
 
-private:
+protected:
 
 	std::shared_ptr<Window> m_window = std::make_shared<Window>();
+
+	std::shared_ptr<Shader> default_shader = std::make_shared<Shader>();
+
+	Factory<Object> object_factory;
+
+	std::vector<std::unique_ptr<Object>> m_object_list;
 	
 	Camera m_camera = Camera();
 	
 	Debugger debug_window = Debugger("test");
-	
-	std::shared_ptr<Shader> default_shader = std::make_shared<Shader>();
-	
-	Object *test_object = nullptr;
-	Object *transparent_object = nullptr;
-	Object *textured_object = nullptr;
-	Object *model_mesh_test = nullptr;
-
-	std::shared_ptr<Light> light = std::make_shared<Light>();
-
-	Model test_model;
-
-	std::vector<std::unique_ptr<Object>> m_object_list;
-
-	Factory<Object> object_factory;
-
-	Skybox skybox;
 };
