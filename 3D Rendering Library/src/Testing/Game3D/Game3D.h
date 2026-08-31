@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Engine/Game.h"
+#include "../../Engine/Game.h"
 
 class Game3D : public Game
 {
@@ -23,4 +23,6 @@ private:
 	Model test_model;
 
 	Skybox skybox;
+
+	Factory<Object> object_factory;
 };

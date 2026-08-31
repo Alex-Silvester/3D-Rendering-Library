@@ -37,7 +37,7 @@ protected:
 
 	std::shared_ptr<Shader> default_shader = std::make_shared<Shader>();
 
-	Factory<Object> object_factory;
+	
 
 	std::vector<std::unique_ptr<Object>> m_object_list;
 	

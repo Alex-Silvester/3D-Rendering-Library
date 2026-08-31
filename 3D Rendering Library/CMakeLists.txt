@@ -92,7 +92,7 @@ add_executable (Renderer
 "src/Engine/Skybox/Skybox.cpp" 
 "src/Engine/Utils/Utils.cpp"
 "src/Engine/Timer/Timer.h" 
-"src/Engine/Model/Model.h" "src/Engine/Model/Model.cpp" "src/Engine/Light/Light.h" "src/Testing/Game3D.h" "src/Testing/Game3D.cpp")
+"src/Engine/Model/Model.h" "src/Engine/Model/Model.cpp" "src/Engine/Light/Light.h" "src/Testing/Game3D/Game3D.h" "src/Testing/Game3D/Game3D.cpp" "src/Testing/Game2D/Game2D.h" "src/Testing/Game2D/Game2D.cpp")
 
 target_link_libraries(Renderer PRIVATE glfw)
 target_link_libraries(Renderer PRIVATE glm::glm)

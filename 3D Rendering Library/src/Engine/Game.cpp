@@ -36,8 +36,7 @@ void Game::windowInit()
 	
 	debug_window.init(*m_window);
   
-  object_factory.addCopyObject(Object(Transform(), default_square, Material(default_shader)));
-  object_factory.addObjectList(m_object_list);
+  
 
 	addKeys();
 }

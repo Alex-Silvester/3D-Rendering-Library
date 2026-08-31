@@ -4,6 +4,9 @@ void Game3D::gameInit()
 {
   skybox.initialiseFaces("Data/images/skybox");
 
+  object_factory.addCopyObject(Object(Transform(), default_square, Material(default_shader)));
+  object_factory.addObjectList(m_object_list);
+
   default_shader->init("Data/shaders/vertex/default.vert", "Data/shaders/fragment/default.frag");
   default_shader->setProjection(m_window->getProjection());
 
